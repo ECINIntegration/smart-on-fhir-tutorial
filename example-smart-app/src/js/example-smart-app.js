@@ -68,6 +68,20 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
+          
+          var immunuzations = new Array();;
+          
+          if(imm != null && Array.isArray(imm)) {
+            
+            for (var i = 0; i < imm.length; i++) {
+                var im = new immunization();
+                im.date = imm[i].date;
+                im.textstatus = imm[i].text.status;
+                im.textdiv = imm[i].text.div;
+                immunuzations.push(im);
+            }
+            
+          }
 
           ret.resolve(p);
         });
