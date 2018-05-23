@@ -96,6 +96,14 @@
     };
   }
 
+  function immunization(){
+    return {
+      date: {value: ''},
+      textstatus: {value: ''},
+      textdiv: {value: ''},
+    };
+  }
+
   function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
     BPObservations.forEach(function(observation){
