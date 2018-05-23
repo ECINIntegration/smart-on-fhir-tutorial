@@ -174,7 +174,7 @@
     
     var tbl = document.getElementById('tblImmunizations');
     
-    if(p.imms != null && Array.isArray(imms)) {
+    if(imms != null && Array.isArray(imms)) {
       
       for (var i = 0; i < imms.length; i++) {
         var row = document.createElement('tr');
