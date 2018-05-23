@@ -83,6 +83,8 @@
             
           }
 
+          p.imms = immunuzations;
+          
           ret.resolve(p);
         });
       } else {
@@ -107,6 +109,7 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
+      imms: {value: ''},
     };
   }
 
