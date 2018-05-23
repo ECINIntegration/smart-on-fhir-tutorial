@@ -180,21 +180,9 @@
         
         var row = document.createElement('tr');
         
-        var cell1 = document.createElement('td');
-        cell1.textContent = "Date";
-        row.appendChild(cell1);
-        
-        var cell2 = document.createElement('td');
-        cell2.textContent = imms[i].date;
-        row.appendChild(cell2);
-        
-        var cell3 = document.createElement('td');
-        cell3.textContent = "Detail";
-        row.appendChild(cell3);
-        
-        var cell4 = document.createElement('td');
-        cell4.textContent =  imms[i].textdiv;
-        row.appendChild(cell4);
+        var cell = document.createElement('td');
+        cell.innerHTML =  imms[i].textdiv;
+        row.appendChild(cell);
         
         tbl.appendChild(row);
       }
