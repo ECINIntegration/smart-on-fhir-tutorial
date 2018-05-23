@@ -169,6 +169,29 @@
       return undefined;
     }
   }
+  
+  function buildImmunizationsTable(imms) {
+    
+    var tbl = document.getElementById('tblImmunizations');
+    
+    if(p.imms != null && Array.isArray(p.imms)) {
+      
+      for (var i = 0; i < imms.length; i++) {
+        var row = document.createElement('tr');
+        for (var j = 0; j < imms[i].length; j++) {
+          var cell = document.createElement('td');
+          cell.textContent = imms[i][j];
+          row.appendChild(cell);
+        }
+        tbl.appendChild(row);
+      }
+      
+      tbl.style.visibility = 'visible';
+    }else{
+      tbl.style.visibility = 'hidden';
+    }
+
+  }
 
   window.drawVisualization = function(p) {
     $('#holder').show();
@@ -183,13 +206,8 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-    
-    if(p.imms != null && Array.isArray(p.imms)) {
-      
-    }else{
-      
-    };
-    
+
+    buildImmunizationsTable(p.imms);    
   };
 
 })(window);
