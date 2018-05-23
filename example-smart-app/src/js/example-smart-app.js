@@ -183,6 +183,13 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
+    
+    if(p.imms != null && Array.isArray(p.imms)) {
+      
+    }else{
+      
+    };
+    
   };
 
 })(window);
