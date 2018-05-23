@@ -21,10 +21,13 @@
                       }
                     }
                   });
+        var imm = smart.patient.api.fetchAll({
+                    type: 'Immunization'
+                  });
 
-        $.when(pt, obv).fail(onError);
+        $.when(pt, obv, imm).fail(onError);
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, imm).done(function(patient, obv, imm) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
