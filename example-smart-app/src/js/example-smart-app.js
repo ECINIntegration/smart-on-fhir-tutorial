@@ -186,17 +186,18 @@
       
       for (var i = 0; i < imms.length; i++) {
         
-        var row = document.createElement('tr');
-
+        var row0 = document.createElement('tr');
         var cell0 = document.createElement('td');
-        cell0.innerHTML =  imms[i].date;
-        row.appendChild(cell0);
+        cell0.innerHTML =  imms[i].textdiv;
+        row0.appendChild(cell0);        
+        tbl.appendChild(row0);
         
+        var row1 = document.createElement('tr');
         var cell1 = document.createElement('td');
-        cell1.innerHTML =  imms[i].textdiv;
-        row.appendChild(cell1);
+        cell1.innerHTML =  imms[i].date;
+        row1.appendChild(cell1);
+        tbl.appendChild(row1);
         
-        tbl.appendChild(row);
       }
       
     }else{
