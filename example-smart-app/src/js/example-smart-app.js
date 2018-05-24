@@ -76,8 +76,13 @@
             for (var i = 0; i < imm.length; i++) {
                 var im = new immunization();
                 im.date = imm[i].date;
-                im.textstatus = imm[i].text.status;
-                im.textdiv = imm[i].text.div;
+                if(imm[i].text != null){
+                  im.textstatus = imm[i].text.status;
+                  im.textdiv = imm[i].text.div;
+                }else{
+                  im.textstatus = '';
+                  im.textdiv = '';
+                }
                 immunuzations.push(im);
             }
             
