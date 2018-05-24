@@ -189,7 +189,7 @@
         var row = document.createElement('tr');
 
         var cell0 = document.createElement('td');
-        cell0.innerHTML =  imms[i].textdiv;
+        cell0.innerHTML =  imms[i].date;
         row.appendChild(cell0);
         
         var cell1 = document.createElement('td');
