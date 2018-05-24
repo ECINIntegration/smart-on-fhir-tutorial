@@ -79,6 +79,9 @@
                 if(imm[i].text != null){
                   im.textstatus = imm[i].text.status;
                   im.textdiv = imm[i].text.div;
+                }else if(imm[i].vaccineCode != null){
+                  im.textstatus = '';
+                  im.textdiv = imm[i].vaccineCode.text;
                 }else{
                   im.textstatus = '';
                   im.textdiv = '';
@@ -184,10 +187,14 @@
       for (var i = 0; i < imms.length; i++) {
         
         var row = document.createElement('tr');
+
+        var cell0 = document.createElement('td');
+        cell0.innerHTML =  imms[i].textdiv;
+        row.appendChild(cell0);
         
-        var cell = document.createElement('td');
-        cell.innerHTML =  imms[i].textdiv;
-        row.appendChild(cell);
+        var cell1 = document.createElement('td');
+        cell1.innerHTML =  imms[i].textdiv;
+        row.appendChild(cell1);
         
         tbl.appendChild(row);
       }
