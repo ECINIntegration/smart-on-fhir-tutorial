@@ -158,8 +158,8 @@
           dRpt.reference = '';
           dRpt.result = diagRpt[i].text.div;
         }else if(diagRpt[i].result != null && Array.isArray(diagRpt[i].result)){
-          dRpt.textstatus = '';
-          dRpt.textdiv = '';
+          dRpt.reference = '';
+          dRpt.result = '';
         }else{
           dRpt.reference = '';
           dRpt.result = '';
