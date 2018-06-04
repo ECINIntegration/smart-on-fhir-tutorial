@@ -265,7 +265,33 @@
     }
 
   }
-
+  
+  function buildDiagnosticsRportTable(diagRpts) {
+    var tbl = document.getElementById('tblDiagnosticsRports');
+    
+    if(diagRpts != null && Array.isArray(diagRpts)) {
+      for (var i = 0; i < diagRpts.length; i++) {
+        var row0 = document.createElement('tr');
+        var cell0 = document.createElement('td');
+        cell0.innerHTML =  diagRpts[i].status;
+        row0.appendChild(cell0);        
+        tbl.appendChild(row0);
+        
+        var row1 = document.createElement('tr');
+        var cell1 = document.createElement('td');
+        cell1.innerHTML =  diagRpts[i].result;
+        row1.appendChild(cell1);
+        tbl.appendChild(row1); 
+      }
+    }else{
+      var row = document.createElement('tr');
+      var cell = document.createElement('td');
+      cell.textContent = "N/A";
+      row.appendChild(cell);
+      tbl.appendChild(row); 
+    }
+  }
+  
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
