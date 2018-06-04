@@ -161,12 +161,10 @@
         if(diagRpt[i].text != null){
           dRpt.result = diagRpt[i].text.div;
         }else if(diagRpt[i].result != null && Array.isArray(diagRpt[i].result)){
-          dRpt.reference = '';
           dRpt.result = joinDiagnosticReportResults(diagRpt[i].result);
         }else{
           dRpt.result = '';
         }
-        
         diagnosticReports.push(dRpt);
       }
             
