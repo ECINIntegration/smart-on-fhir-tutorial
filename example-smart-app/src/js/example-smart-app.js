@@ -266,7 +266,7 @@
 
   }
   
-  function buildDiagnosticsRportTable(diagRpts) {
+  function buildDiagnosticsReportTable(diagRpts) {
     var tbl = document.getElementById('tblDiagnosticsReports');
     
     if(diagRpts != null && Array.isArray(diagRpts)) {
@@ -306,6 +306,8 @@
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
 
+    buildDiagnosticsReportTable(p.diagRpts);    
+    
     buildImmunizationsTable(p.imms);    
   };
 
