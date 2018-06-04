@@ -9,8 +9,11 @@
 
     function onReady(smart)  {
       if (smart.hasOwnProperty('patient')) {
+        
         var patient = smart.patient;
+        
         var pt = patient.read();
+        
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation',
                     query: {
@@ -21,13 +24,18 @@
                       }
                     }
                   });
+        
         var imm = smart.patient.api.fetchAll({
                     type: 'Immunization'
                   });
+        
+        var diagRpt = smart.patient.api.fetchAll({
+                    type: 'DiagnosticReport'
+                  });
 
-        $.when(pt, obv, imm).fail(onError);
+        $.when(pt, obv, imm, diagRpt).fail(onError);
 
-        $.when(pt, obv, imm).done(function(patient, obv, imm) {
+        $.when(pt, obv, imm, diagRpt).done(function(patient, obv, imm, diagRpt) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
@@ -101,6 +109,7 @@
     }
 
     FHIR.oauth2.ready(onReady, onError);
+    
     return ret.promise();
 
   };
