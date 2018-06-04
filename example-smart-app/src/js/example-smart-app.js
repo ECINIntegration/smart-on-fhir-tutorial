@@ -76,29 +76,7 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-/*          
-          var immunuzations = new Array();;
-          
-          if(imm != null && Array.isArray(imm)) {
-            
-            for (var i = 0; i < imm.length; i++) {
-                var im = new immunization();
-                im.date = imm[i].date;
-                if(imm[i].text != null){
-                  im.textstatus = imm[i].text.status;
-                  im.textdiv = imm[i].text.div;
-                }else if(imm[i].vaccineCode != null){
-                  im.textstatus = '';
-                  im.textdiv = imm[i].vaccineCode.text;
-                }else{
-                  im.textstatus = '';
-                  im.textdiv = '';
-                }
-                immunuzations.push(im);
-            }
-            
-          }
-*/
+
           p.imms = buildImmunizations(imm);
           
           p.diagRpts = buildDiagnosticReportList(diagRpt);
@@ -145,7 +123,6 @@
     return {
       status: {value: ''},
       result: {value: ''},
-      reference: {value: ''},
     };
   }
   
@@ -182,13 +159,11 @@
         var dRpt = new diagnosticReport();
         dRpt.status = diagRpt[i].status;
         if(diagRpt[i].text != null){
-          dRpt.reference = '';
           dRpt.result = diagRpt[i].text.div;
         }else if(diagRpt[i].result != null && Array.isArray(diagRpt[i].result)){
           dRpt.reference = '';
           dRpt.result = joinDiagnosticReportResults(diagRpt[i].result);
         }else{
-          dRpt.reference = '';
           dRpt.result = '';
         }
         
@@ -204,7 +179,7 @@
     var diagnosticResults = '';
     if(results != null && Array.isArray(results)) {
       for (var i = 0; i < results.length; i++) {        
-        diagnosticResults = diagnosticResults + ', ' + results[i].display
+        diagnosticResults = diagnosticResults + ' ' + results[i].display + ' (' + results[i].reference +  ')<br>'
       }
     }
     return diagnosticResults;
