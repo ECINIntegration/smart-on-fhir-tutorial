@@ -76,7 +76,7 @@
 
           p.hdl = getQuantityValueAndUnit(hdl[0]);
           p.ldl = getQuantityValueAndUnit(ldl[0]);
-          
+/*          
           var immunuzations = new Array();;
           
           if(imm != null && Array.isArray(imm)) {
@@ -98,8 +98,10 @@
             }
             
           }
-
-          p.imms = immunuzations;
+*/
+          p.imms = buildImmunizations(imm);
+          
+          p.diagRpts = buildDiagnosticReportList(diagRpt);
           
           ret.resolve(p);
         });
@@ -127,6 +129,7 @@
       ldl: {value: ''},
       hdl: {value: ''},
       imms: {value: ''},
+      diagRpts: {value: ''},
     };
   }
 
@@ -146,8 +149,32 @@
     };
   }
   
+  function buildImmunizations(imm){
+    var immunuzations = new Array();;
+          
+    if(imm != null && Array.isArray(imm)) {
+      for (var i = 0; i < imm.length; i++) {
+        var im = new immunization();
+        im.date = imm[i].date;
+        if(imm[i].text != null){
+          im.textstatus = imm[i].text.status;
+          im.textdiv = imm[i].text.div;
+        }else if(imm[i].vaccineCode != null){
+          im.textstatus = '';
+          im.textdiv = imm[i].vaccineCode.text;
+        }else{
+          im.textstatus = '';
+          im.textdiv = '';
+        }
+        immunuzations.push(im);
+      }
+    }
+
+    return immunuzations;
+  }
+
   function buildDiagnosticReportList(diagRpt){
-    var diagnosticReports = new Array();;
+    var diagnosticReports = new Array();
           
     if(diagRpt != null && Array.isArray(diagRpt)) {
             
@@ -159,7 +186,7 @@
           dRpt.result = diagRpt[i].text.div;
         }else if(diagRpt[i].result != null && Array.isArray(diagRpt[i].result)){
           dRpt.reference = '';
-          dRpt.result = '';
+          dRpt.result = joinDiagnosticReportResults(diagRpt[i].result);
         }else{
           dRpt.reference = '';
           dRpt.result = '';
@@ -173,6 +200,16 @@
     return diagnosticReports;
   }
 
+  function joinDiagnosticReportResults(results){
+    var diagnosticResults = '';
+    if(results != null && Array.isArray(results)) {
+      for (var i = 0; i < results.length; i++) {        
+        diagnosticResults = diagnosticResults + ', ' + results[i].display
+      }
+    }
+    return diagnosticResults;
+  }
+  
   function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
     BPObservations.forEach(function(observation){
