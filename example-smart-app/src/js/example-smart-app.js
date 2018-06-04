@@ -267,7 +267,7 @@
   }
   
   function buildDiagnosticsRportTable(diagRpts) {
-    var tbl = document.getElementById('tblDiagnosticsRports');
+    var tbl = document.getElementById('tblDiagnosticsReports');
     
     if(diagRpts != null && Array.isArray(diagRpts)) {
       for (var i = 0; i < diagRpts.length; i++) {
