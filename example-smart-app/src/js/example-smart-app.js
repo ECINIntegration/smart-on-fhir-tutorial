@@ -138,6 +138,14 @@
     };
   }
 
+  function diagnosticReport(){
+    return {
+      status: {value: ''},
+      result: {value: ''},
+      reference: {value: ''},
+    };
+  }
+
   function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
     BPObservations.forEach(function(observation){
