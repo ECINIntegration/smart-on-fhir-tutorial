@@ -145,6 +145,33 @@
       reference: {value: ''},
     };
   }
+  
+  function buildDiagnosticReportList(diagRpt){
+    var diagnosticReports = new Array();;
+          
+    if(diagRpt != null && Array.isArray(diagRpt)) {
+            
+      for (var i = 0; i < diagRpt.length; i++) {
+        var dRpt = new diagnosticReport();
+        dRpt.status = diagRpt[i].status;
+        if(diagRpt[i].text != null){
+          dRpt.reference = '';
+          dRpt.result = diagRpt[i].text.div;
+        }else if(diagRpt[i].result != null && Array.isArray(diagRpt[i].result)){
+          dRpt.textstatus = '';
+          dRpt.textdiv = '';
+        }else{
+          dRpt.reference = '';
+          dRpt.result = '';
+        }
+        
+        diagnosticReports.push(dRpt);
+      }
+            
+    }
+    
+    return diagnosticReports;
+  }
 
   function getBloodPressureValue(BPObservations, typeOfPressure) {
     var formattedBPObservations = [];
