@@ -93,6 +93,8 @@
           
           p.diagRpts = buildDiagnosticReportList(diagRpt);
           
+          p.medicOrders = buildMedicationOrderList(medicOrder);
+          
           ret.resolve(p);
         });
       } else {
@@ -120,6 +122,7 @@
       hdl: {value: ''},
       imms: {value: ''},
       diagRpts: {value: ''},
+      medicOrders: {value: ''},
     };
   }
 
@@ -135,6 +138,14 @@
     return {
       status: {value: ''},
       result: {value: ''},
+    };
+  }
+
+  function medicationOrder(){
+    return {
+      date: {value: ''},
+      text: {value: ''},
+      status: {value: ''},
     };
   }
   
@@ -193,6 +204,35 @@
       }
     }
     return diagnosticResults;
+  }
+  
+  function buildMedicationOrderList(medicOrders){
+    var medicationOrders = new Array();
+          
+    if(medicOrders != null && Array.isArray(medicOrders)) {
+            
+      for (var i = 0; i < medicOrders.length; i++) {
+        var medicOrder = new medicationOrder();
+        
+        medicOrder.date = medicOrders[i].datewritten;
+        medicOrder.status = medicOrders[i].status;
+        
+        if(medicOrders[i].text != null){
+          medicOrder.text = medicOrders[i].text.div;
+        }else if(medicOrders[i].medicationReference != null){
+          medicOrder.text = medicOrder[i].medicationReference.display;
+        }else if(medicOrders[i].medicationCodeableConcept != null){
+          medicOrder.text = medicOrder[i].medicationCodeableConcept.text;
+        }else{
+          medicOrder.text = '';
+        }
+        
+        medicationOrders.push(medicOrder);
+        
+      }
+    }
+    
+    return medicationOrders;
   }
   
   function getBloodPressureValue(BPObservations, typeOfPressure) {
