@@ -292,12 +292,12 @@
         
         var row0 = document.createElement('tr');
         var cell0 = document.createElement('td');
-        cell0.innerHTML =  imms[i].textdiv;
+        cell0.innerHTML =  imms[i].date;
         cell0.style.textAlign = "left";
         cell0.style.verticalAlign = "top";
         row0.appendChild(cell0);
         var cell1 = document.createElement('td');
-        cell1.innerHTML =  imms[i].date;
+        cell1.innerHTML =  imms[i].textdiv;
         cell1.style.textAlign = "left";
         cell1.style.verticalAlign = "top";
         row0.appendChild(cell1);
