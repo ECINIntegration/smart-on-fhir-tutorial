@@ -25,17 +25,29 @@
                     }
                   });
         
-        var imm = smart.patient.api.fetchAll({
+        var im = smart.patient.api.fetchAll({
                     type: 'Immunization'
                   });
         
-        var diagRpt = smart.patient.api.fetchAll({
+        var dr = smart.patient.api.fetchAll({
                     type: 'DiagnosticReport'
                   });
+        
+        var ma = smart.patient.api.fetchAll({
+                    type: 'MedicationAdministration'
+                  });
+        
+        var mo = smart.patient.api.fetchAll({
+                    type: 'MedicationOrder'
+                  });
+        
+        var ms = smart.patient.api.fetchAll({
+                    type: 'MedicationStatement'
+                  });
 
-        $.when(pt, obv, imm, diagRpt).fail(onError);
+        $.when(pt, obv, im, dr, ma, mo, ms).fail(onError);
 
-        $.when(pt, obv, imm, diagRpt).done(function(patient, obv, imm, diagRpt) {
+        $.when(pt, obv, im, dr, ma, mo, ms).done(function(patient, obv, imm, diagRpt, medicAdmin, medicOrder, medicStmnt) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
