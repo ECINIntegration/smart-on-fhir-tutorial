@@ -593,7 +593,9 @@
 
     buildDiagnosticsReportTable(p.diagRpts);    
     buildImmunizationsTable(p.imms);   
-    buildMedicationOrderTable(p.medicOrders) 
+    buildMedicationOrderTable(p.medicOrders);
+    buildMedicationAdministrationTable(p.medicAdmins);
+    buildMedicationStatementTable(p.medicStmnts)
   };
 
 })(window);
