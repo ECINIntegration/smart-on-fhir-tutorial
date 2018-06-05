@@ -325,7 +325,7 @@
 
   function joinMedicationStatementDosages(dosages){
     var statementDosages = '';
-    if(results != null && Array.isArray(dosages)) {
+    if(dosages != null && Array.isArray(dosages)) {
       for (var i = 0; i < dosages.length; i++) {        
         statementDosages = statementDosages + ' ' + dosages[i].text + '<br>'
       }
