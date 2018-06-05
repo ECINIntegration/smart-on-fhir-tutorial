@@ -212,7 +212,7 @@
       for (var i = 0; i < medicOrders.length; i++) {
         var medicOrder = new medicationOrder();
         
-        medicOrder.date = medicOrders[i].datewritten;
+        medicOrder.date = medicOrders[i].dateWritten;
         medicOrder.status = medicOrders[i].status;
         
         if(medicOrders[i].text != null){
