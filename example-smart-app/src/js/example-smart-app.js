@@ -299,7 +299,7 @@
         medicStmnt.date = medicStmnts[i].effectiveTimeDateTime;
         medicStmnt.status = medicStmnts[i].status;
         
-        if(medicStmnts[i].medicationCodeableConcept != null){
+        if(medicStmnts[i].dosage != null && Array.isArray(medicStmnts[i].dosage)){
           medicStmnt.dosage = medicStmnts[i].dosage.text;
         }else{
           medicStmnt.dosage = '';
@@ -307,6 +307,8 @@
         
         if(medicStmnts[i].text != null){
           medicStmnt.text = medicStmnts[i].text.div;
+        }else if(medicStmnts[i].medicationReference != null){
+          medicStmnt.text = medicStmnts[i].medicationReference.display;
         }else if(medicStmnts[i].medicationCodeableConcept != null){
           medicStmnt.text = medicStmnts[i].medicationCodeableConcept.text;
         }else{
@@ -319,6 +321,16 @@
     }
     
     return medicationStatements;
+  }
+
+  function joinMedicationStatementDosages(dosages){
+    var statementDosages = '';
+    if(results != null && Array.isArray(dosages)) {
+      for (var i = 0; i < dosages.length; i++) {        
+        statementDosages = statementDosages + ' ' + dosages[i].text + '<br>'
+      }
+    }
+    return statementDosages;
   }
   
   function getBloodPressureValue(BPObservations, typeOfPressure) {
