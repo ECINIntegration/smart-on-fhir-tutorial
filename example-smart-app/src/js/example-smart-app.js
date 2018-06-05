@@ -300,7 +300,7 @@
         medicStmnt.status = medicStmnts[i].status;
         
         if(medicStmnts[i].dosage != null && Array.isArray(medicStmnts[i].dosage)){
-          medicStmnt.dosage = medicStmnts[i].dosage.text;
+          medicStmnt.dosage = joinMedicationStatementDosages(medicStmnts[i].dosage);
         }else{
           medicStmnt.dosage = '';
         }
@@ -386,7 +386,7 @@
     
     var tbl = document.getElementById('tblImmunizations');
     
-    if(imms != null && Array.isArray(imms)) {
+    if(imms != null && Array.isArray(imms) && imms.length > 0) {
       
       for (var i = 0; i < imms.length; i++) {
         
@@ -422,7 +422,7 @@
   function buildDiagnosticsReportTable(diagRpts) {
     var tbl = document.getElementById('tblDiagnosticsReports');
     
-    if(diagRpts != null && Array.isArray(diagRpts)) {
+    if(diagRpts != null && Array.isArray(diagRpts) && diagRpts.length > 0) {
       for (var i = 0; i < diagRpts.length; i++) {
         var row0 = document.createElement('tr');
         
@@ -454,7 +454,7 @@
   function buildMedicationOrderTable(medicOrders) {
     var tbl = document.getElementById('tblMedicationOrders');
     
-    if(medicOrders != null && Array.isArray(medicOrders)) {
+    if(medicOrders != null && Array.isArray(medicOrders) && medicOrders.length > 0) {
       for (var i = 0; i < medicOrders.length; i++) {
         var row0 = document.createElement('tr');
         
@@ -492,7 +492,7 @@
   function buildMedicationAdministrationTable(medicAdmins) {
     var tbl = document.getElementById('tblMedicationAdministration');
     
-    if(medicAdmins != null && Array.isArray(medicAdmins)) {
+    if(medicAdmins != null && Array.isArray(medicAdmins) && medicAdmins.length > 0) {
       for (var i = 0; i < medicAdmins.length; i++) {
         var row0 = document.createElement('tr');
         
@@ -536,7 +536,7 @@
   function buildMedicationStatementTable(medicStmnts) {
     var tbl = document.getElementById('tblMedicationStatements');
     
-    if(medicStmnts != null && Array.isArray(medicStmnts)) {
+    if(medicStmnts != null && Array.isArray(medicStmnts) && medicStmnts.length > 0) {
       for (var i = 0; i < medicStmnts.length; i++) {
         var row0 = document.createElement('tr');
         
