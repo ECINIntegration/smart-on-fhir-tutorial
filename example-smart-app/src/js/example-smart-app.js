@@ -90,9 +90,7 @@
           p.ldl = getQuantityValueAndUnit(ldl[0]);
 
           p.imms = buildImmunizations(imm);
-          
           p.diagRpts = buildDiagnosticReportList(diagRpt);
-          
           p.medicOrders = buildMedicationOrderList(medicOrder);
           
           ret.resolve(p);
@@ -295,14 +293,15 @@
         var row0 = document.createElement('tr');
         var cell0 = document.createElement('td');
         cell0.innerHTML =  imms[i].textdiv;
-        row0.appendChild(cell0);        
-        tbl.appendChild(row0);
-        
-        var row1 = document.createElement('tr');
+        cell0.style.textAlign = "left";
+        cell0.style.verticalAlign = "top";
+        row0.appendChild(cell0);
         var cell1 = document.createElement('td');
         cell1.innerHTML =  imms[i].date;
-        row1.appendChild(cell1);
-        tbl.appendChild(row1);
+        cell1.style.textAlign = "left";
+        cell1.style.verticalAlign = "top";
+        row0.appendChild(cell1);
+        tbl.appendChild(row0);
         
       }
       
@@ -311,6 +310,8 @@
       var row = document.createElement('tr');
       var cell = document.createElement('td');
       cell.textContent = "N/A";
+      cell.style.textAlign = "center";
+      cell.style.verticalAlign = "top";
       row.appendChild(cell);
       tbl.appendChild(row);
       
@@ -327,10 +328,14 @@
         
         var cell0 = document.createElement('td');
         cell0.innerHTML =  diagRpts[i].status;
+        cell0.style.textAlign = "left";
+        cell0.style.verticalAlign = "top";
         row0.appendChild(cell0);        
 
         var cell1 = document.createElement('td');
         cell1.innerHTML =  diagRpts[i].result;
+        cell1.style.textAlign = "left";
+        cell1.style.verticalAlign = "top";
         row0.appendChild(cell1);
         
         tbl.appendChild(row0); 
@@ -339,6 +344,46 @@
       var row = document.createElement('tr');
       var cell = document.createElement('td');
       cell.textContent = "N/A";
+      cell.style.textAlign = "center";
+      cell.style.verticalAlign = "top";
+      row.appendChild(cell);
+      tbl.appendChild(row); 
+    }
+  }
+
+  function buildMedicationOrderTable(medicOrders) {
+    var tbl = document.getElementById('tblMedicationOrders');
+    
+    if(medicOrders != null && Array.isArray(medicOrders)) {
+      for (var i = 0; i < medicOrders.length; i++) {
+        var row0 = document.createElement('tr');
+        
+        var cell0 = document.createElement('td');
+        cell0.innerHTML =  medicOrders[i].status;
+        cell0.style.textAlign = "left";
+        cell0.style.verticalAlign = "top";
+        row0.appendChild(cell0);        
+
+        var cell1 = document.createElement('td');
+        cell1.innerHTML =  medicOrders[i].date;
+        cell1.style.textAlign = "left";
+        cell1.style.verticalAlign = "top";
+        row0.appendChild(cell1);
+        
+        var cell2 = document.createElement('td');
+        cell2.innerHTML =  medicOrders[i].text;
+        cell2.style.textAlign = "left";
+        cell2.style.verticalAlign = "top";
+        row0.appendChild(cell2);
+        
+        tbl.appendChild(row0); 
+      }
+    }else{
+      var row = document.createElement('tr');
+      var cell = document.createElement('td');
+      cell.textContent = "N/A";
+      cell.style.textAlign = "center";
+      cell.style.verticalAlign = "top";
       row.appendChild(cell);
       tbl.appendChild(row); 
     }
