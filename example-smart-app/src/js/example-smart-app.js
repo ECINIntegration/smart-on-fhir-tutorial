@@ -92,7 +92,9 @@
           p.imms = buildImmunizations(imm);
           p.diagRpts = buildDiagnosticReportList(diagRpt);
           p.medicOrders = buildMedicationOrderList(medicOrder);
-          
+          p.medicAdmins = buildMedicationAdministrationList(medicAdmin);
+          p.medicStmnts = buildMedicationStatementList(medicStmnt);
+
           ret.resolve(p);
         });
       } else {
@@ -121,6 +123,8 @@
       imms: {value: ''},
       diagRpts: {value: ''},
       medicOrders: {value: ''},
+      medicAdmins: {value: ''},
+      medicStmnts: {value: ''},
     };
   }
 
@@ -249,6 +253,72 @@
     }
     
     return medicationOrders;
+  }
+  
+  function buildMedicationAdministrationList(medicAdmins){
+    var medicationAdministrations = new Array();
+          
+    if(medicAdmins != null && Array.isArray(medicAdmins)) {
+            
+      for (var i = 0; i < medicAdmins.length; i++) {
+        var medicAdmin = new medicationAdministration();
+        
+        medicAdmin.date = medicAdmins[i].effectiveTimeDateTime;
+        medicAdmin.status = medicAdmins[i].status;
+        
+        if(medicAdmins[i].medicationCodeableConcept != null){
+          medicAdmin.dosage = medicAdmins[i].dosage.text;
+        }else{
+          medicAdmin.dosage = '';
+        }
+        
+        if(medicAdmins[i].text != null){
+          medicAdmin.text = medicAdmins[i].text.div;
+        }else if(medicAdmins[i].medicationCodeableConcept != null){
+          medicAdmin.text = medicAdmins[i].medicationCodeableConcept.text;
+        }else{
+          medicAdmin.text = '';
+        }
+        
+        medicationAdministrations.push(medicAdmin);
+        
+      }
+    }
+    
+    return medicationAdministrations;
+  }
+  
+  function buildMedicationStatementList(medicStmnts){
+    var medicationStatements = new Array();
+          
+    if(medicStmnts != null && Array.isArray(medicStmnts)) {
+            
+      for (var i = 0; i < medicStmnts.length; i++) {
+        var medicStmnt = new medicationStatement();
+        
+        medicStmnt.date = medicStmnts[i].effectiveTimeDateTime;
+        medicStmnt.status = medicStmnts[i].status;
+        
+        if(medicStmnts[i].medicationCodeableConcept != null){
+          medicStmnt.dosage = medicStmnts[i].dosage.text;
+        }else{
+          medicStmnt.dosage = '';
+        }
+        
+        if(medicStmnts[i].text != null){
+          medicStmnt.text = medicStmnts[i].text.div;
+        }else if(medicStmnts[i].medicationCodeableConcept != null){
+          medicStmnt.text = medicStmnts[i].medicationCodeableConcept.text;
+        }else{
+          medicStmnt.text = '';
+        }
+        
+        medicationStatements.push(medicStmnt);
+        
+      }
+    }
+    
+    return medicationStatements;
   }
   
   function getBloodPressureValue(BPObservations, typeOfPressure) {
@@ -393,6 +463,94 @@
         cell2.style.textAlign = "left";
         cell2.style.verticalAlign = "top";
         row0.appendChild(cell2);
+        
+        tbl.appendChild(row0); 
+      }
+    }else{
+      var row = document.createElement('tr');
+      var cell = document.createElement('td');
+      cell.textContent = "N/A";
+      cell.style.textAlign = "center";
+      cell.style.verticalAlign = "top";
+      row.appendChild(cell);
+      tbl.appendChild(row); 
+    }
+  }
+
+  function buildMedicationAdministrationTable(medicAdmins) {
+    var tbl = document.getElementById('tblMedicationAdministration');
+    
+    if(medicAdmins != null && Array.isArray(medicAdmins)) {
+      for (var i = 0; i < medicAdmins.length; i++) {
+        var row0 = document.createElement('tr');
+        
+        var cell0 = document.createElement('td');
+        cell0.innerHTML =  medicAdmins[i].status;
+        cell0.style.textAlign = "left";
+        cell0.style.verticalAlign = "top";
+        row0.appendChild(cell0);        
+
+        var cell1 = document.createElement('td');
+        cell1.innerHTML =  medicAdmins[i].date;
+        cell1.style.textAlign = "left";
+        cell1.style.verticalAlign = "top";
+        row0.appendChild(cell1);
+
+        var cell2 = document.createElement('td');
+        cell2.innerHTML =  medicAdmins[i].dosage;
+        cell2.style.textAlign = "left";
+        cell2.style.verticalAlign = "top";
+        row0.appendChild(cell2);
+        
+        var cell3 = document.createElement('td');
+        cell3.innerHTML =  medicAdmins[i].text;
+        cell3.style.textAlign = "left";
+        cell3.style.verticalAlign = "top";
+        row0.appendChild(cell3);
+        
+        tbl.appendChild(row0); 
+      }
+    }else{
+      var row = document.createElement('tr');
+      var cell = document.createElement('td');
+      cell.textContent = "N/A";
+      cell.style.textAlign = "center";
+      cell.style.verticalAlign = "top";
+      row.appendChild(cell);
+      tbl.appendChild(row); 
+    }
+  }
+
+  function buildMedicationStatementTable(medicStmnts) {
+    var tbl = document.getElementById('tblMedicationStatements');
+    
+    if(medicStmnts != null && Array.isArray(medicStmnts)) {
+      for (var i = 0; i < medicStmnts.length; i++) {
+        var row0 = document.createElement('tr');
+        
+        var cell0 = document.createElement('td');
+        cell0.innerHTML = medicStmnts[i].status;
+        cell0.style.textAlign = "left";
+        cell0.style.verticalAlign = "top";
+        row0.appendChild(cell0);        
+
+        var cell1 = document.createElement('td');
+        cell1.innerHTML = medicStmnts[i].date;
+        cell1.style.textAlign = "left";
+        cell1.style.verticalAlign = "top";
+        row0.appendChild(cell1);
+
+        var cell2 = document.createElement('td');
+        cell2.innerHTML = medicStmnts[i].dosage;
+        cell2.style.textAlign = "left";
+        cell2.style.verticalAlign = "top";
+        row0.appendChild(cell2);
+        
+        var cell3 = document.createElement('td');
+        cell3.innerHTML = medicStmnts[i].text;
+        cell3.style.textAlign = "left";
+        cell3.style.verticalAlign = "top";
+        row0.appendChild(cell3);
         
         tbl.appendChild(row0); 
       }
