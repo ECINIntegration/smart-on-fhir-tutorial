@@ -146,6 +146,24 @@
       status: {value: ''},
     };
   }
+
+  function medicationAdministration(){
+    return {
+      date: {value: ''},
+      dosage: {value: ''},
+      text: {value: ''},
+      status: {value: ''},
+    };
+  }
+
+  function medicationStatement(){
+    return {
+      date: {value: ''},
+      dosage: {value: ''},
+      text: {value: ''},
+      status: {value: ''},
+    };
+  }
   
   function buildImmunizations(imm){
     var immunuzations = new Array();;
