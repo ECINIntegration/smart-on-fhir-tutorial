@@ -220,9 +220,9 @@
         if(medicOrders[i].text != null){
           medicOrder.text = medicOrders[i].text.div;
         }else if(medicOrders[i].medicationReference != null){
-          medicOrder.text = medicOrder[i].medicationReference.display;
+          medicOrder.text = medicOrders[i].medicationReference.display;
         }else if(medicOrders[i].medicationCodeableConcept != null){
-          medicOrder.text = medicOrder[i].medicationCodeableConcept.text;
+          medicOrder.text = medicOrders[i].medicationCodeableConcept.text;
         }else{
           medicOrder.text = '';
         }
