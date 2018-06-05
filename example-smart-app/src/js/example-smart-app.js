@@ -404,8 +404,8 @@
     $('#hdl').html(p.hdl);
 
     buildDiagnosticsReportTable(p.diagRpts);    
-    
-    buildImmunizationsTable(p.imms);    
+    buildImmunizationsTable(p.imms);   
+    buildMedicationOrderTable(p.medicOrders) 
   };
 
 })(window);
