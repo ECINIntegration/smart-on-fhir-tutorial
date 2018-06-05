@@ -296,7 +296,7 @@
       for (var i = 0; i < medicStmnts.length; i++) {
         var medicStmnt = new medicationStatement();
         
-        medicStmnt.date = medicStmnts[i].effectiveTimeDateTime;
+        medicStmnt.date = medicStmnts[i].dateAsserted;
         medicStmnt.status = medicStmnts[i].status;
         
         if(medicStmnts[i].dosage != null && Array.isArray(medicStmnts[i].dosage)){
