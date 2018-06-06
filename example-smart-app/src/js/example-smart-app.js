@@ -266,7 +266,7 @@
         medicAdmin.date = medicAdmins[i].effectiveTimeDateTime;
         medicAdmin.status = medicAdmins[i].status;
         
-        if(medicAdmins[i].medicationCodeableConcept != null){
+        if(medicAdmins[i].dosage != null){
           medicAdmin.dosage = medicAdmins[i].dosage.text;
         }else{
           medicAdmin.dosage = '';
