@@ -263,6 +263,7 @@
     if(medicAdmins != null && Array.isArray(medicAdmins)) {
             
       for (var i = 0; i < medicAdmins.length; i++) {
+
         var medicAdmin = new medicationAdministration();
         
         medicAdmin.date = medicAdmins[i].effectiveTimeDateTime;
@@ -282,8 +283,7 @@
           medicAdmin.text = '';
         }
         
-        medicationAdministrations.push(medicAdmin);
-        
+        medicationAdministrations.push(medicAdmin);        
       }
     }
     
