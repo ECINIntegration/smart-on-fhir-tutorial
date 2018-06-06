@@ -219,8 +219,10 @@
   function joinDiagnosticReportResults(results){
     var diagnosticResults = '';
     if(results != null && Array.isArray(results)) {
-      for (var i = 0; i < results.length; i++) {        
-        diagnosticResults = diagnosticResults + ' ' + results[i].display + ' (' + results[i].reference +  ')<br>'
+      for (var i = 0; i < results.length; i++) {   
+        if(results[i].display != null && results[i].reference != null) {
+          diagnosticResults = diagnosticResults + ' ' + results[i].display + ' (' + results[i].reference +  ')<br>'
+        }
       }
     }
     return diagnosticResults;
@@ -326,8 +328,10 @@
   function joinMedicationStatementDosages(dosages){
     var statementDosages = '';
     if(dosages != null && Array.isArray(dosages)) {
-      for (var i = 0; i < dosages.length; i++) {        
-        statementDosages = statementDosages + ' ' + dosages[i].text + '<br>'
+      for (var i = 0; i < dosages.length; i++) {
+        if(dosages[i].text != null) {
+          statementDosages = statementDosages + ' ' + dosages[i].text + '<br>'
+        }
       }
     }
     return statementDosages;
