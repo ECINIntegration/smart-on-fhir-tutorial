@@ -78,6 +78,9 @@
           var hdl = byCodes('2085-9');
           var ldl = byCodes('2089-1');
 
+          var pid = patient.id;
+          var tkn = smart.tokenResponse;
+          
           var p = defaultPatient();
           p.birthdate = dobStr;
           p.gender = gender;
@@ -98,7 +101,7 @@
           p.ldl = getQuantityValueAndUnit(ldl[0]);
 
           p.imms = buildImmunizations(imm);
-          p.diagRpts = buildDiagnosticReportList(diagRpt);
+          p.diagRpts = buildDiagnosticReportList(diagRpt, pid, tkn);
           p.medicOrders = buildMedicationOrderList(medicOrder);
           p.medicAdmins = buildMedicationAdministrationList(medicAdmin);
           p.medicStmnts = buildMedicationStatementList(medicStmnt);
@@ -148,9 +151,19 @@
     return {
       status: {value: ''},
       result: {value: ''},
+      patid: {value: ''},
+      accesstkn: {value: ''},
+      forms: {value: ''},
     };
   }
 
+  function presentedForm(){
+    return {
+      url: {value: ''},
+      contenttype: {value: ''},
+    };
+  }
+  
   function medicationOrder(){
     return {
       date: {value: ''},
@@ -201,14 +214,19 @@
     return immunuzations;
   }
 
-  function buildDiagnosticReportList(diagRpt){
+  function buildDiagnosticReportList(diagRpt, pid, tkn){
     var diagnosticReports = new Array();
           
     if(diagRpt != null && Array.isArray(diagRpt)) {
             
       for (var i = 0; i < diagRpt.length; i++) {
+        
         var dRpt = new diagnosticReport();
+        
         dRpt.status = diagRpt[i].status;
+        dRpt.patid = pid;
+        dRpt.accesstkn = tkn.access_token;
+        
         if(diagRpt[i].text != null){
           dRpt.result = diagRpt[i].text.div;
         }else if(diagRpt[i].result != null && Array.isArray(diagRpt[i].result)){
@@ -216,6 +234,9 @@
         }else{
           dRpt.result = '';
         }
+
+        dRpt.forms = buildForms(diagRpt[i].presentedForm);
+        
         diagnosticReports.push(dRpt);
       }
             
@@ -236,6 +257,20 @@
     return diagnosticResults;
   }
   
+  function buildForms(form){
+    var presentedForms = new Array();
+    
+    if(form != null && Array.isArray(form)) {
+      for (var i = 0; i < form.length; i++) {
+        var presentedForm = new presentedForm();
+        presentedForm.url = form.url;
+        presentedForm.contenttype = form.contentType;
+        presentedForms.push(presentedForm);        
+      }
+    }      
+    return presentedForms;
+  }
+    
   function buildMedicationOrderList(medicOrders){
     var medicationOrders = new Array();
           
