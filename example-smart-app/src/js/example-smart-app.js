@@ -263,8 +263,8 @@
     if(form != null && Array.isArray(form)) {
       for (var i = 0; i < form.length; i++) {
         var diagForm = new diagnosticForm();
-        diagForm.url = form.url;
-        diagForm.contenttype = form.contentType;
+        diagForm.url = form[i].url;
+        diagForm.contenttype = form[i].contentType;
         diagnosticForms.push(diagForm);        
       }
     }      
