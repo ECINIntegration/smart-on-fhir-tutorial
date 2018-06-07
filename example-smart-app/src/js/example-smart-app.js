@@ -495,7 +495,7 @@
             a.appendChild(linkText);
             a.title = "Form " + (i + 1).toString();
             a.href = "#";
-            a.onclick = function() {getDocument(diagRpts.accesstkn, diagRpts.forms[i].url, diagRpts.forms[i].contenttype, diagRpts.patid))};
+            a.onclick = function() {getDocument(diagRpts.accesstkn, diagRpts.forms[i].url, diagRpts.forms[i].contenttype, diagRpts.patid)};
             cell.appendChild(a);
             var space = document.createTextNode(" ");
             cell.appendChild(space);
