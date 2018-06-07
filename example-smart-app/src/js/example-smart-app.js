@@ -737,8 +737,8 @@
       }
     };
 
-    xmlHttpRequest.open("GET", endPoint, false);
-    xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
+    xmlHttpRequest.open("GET", endPoint, true);
+    xmlHttpRequest.setRequestHeader("Content-Type", type);
     xmlHttpRequest.setRequestHeader("Authorization", "Bearer " + jwt);
     xmlHttpRequest.send("");
   };
