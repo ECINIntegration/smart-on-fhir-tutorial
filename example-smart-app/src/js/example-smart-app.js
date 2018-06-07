@@ -489,13 +489,13 @@
           var cell = document.createElement('td');
           cell.style.textAlign = "left";
           cell.style.verticalAlign = "top";
-          for (var i = 0; i < diagRpts.forms.length; i++) {
+          for (var j = 0; j < diagRpts.forms.length; j++) {
             var a = document.createElement('a');
-            var linkText = document.createTextNode("Form " + (i + 1).toString());
+            var linkText = document.createTextNode("Form " + (j + 1).toString());
             a.appendChild(linkText);
-            a.title = "Form " + (i + 1).toString();
+            a.title = "Form " + (j + 1).toString();
             a.href = "#";
-            a.onclick = function() {getDocument(diagRpts.accesstkn, diagRpts.forms[i].url, diagRpts.forms[i].contenttype, diagRpts.patid)};
+            a.onclick = function() {getDocument(diagRpts[i].accesstkn, diagRpts[i].forms[j].url, diagRpts[i].forms[j].contenttype, diagRpts[i].patid)};
             cell.appendChild(a);
             var space = document.createTextNode(" ");
             cell.appendChild(space);
