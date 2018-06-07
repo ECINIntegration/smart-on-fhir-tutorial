@@ -41,11 +41,11 @@
           type: 'MedicationOrder'
         });
         
-        /*
         var ms = smart.patient.api.fetchAll({
           type: 'MedicationStatement'
         });
-
+        
+        /*
         var allobv = smart.patient.api.fetchAll({
           type: 'Observation'
         });
