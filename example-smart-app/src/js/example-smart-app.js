@@ -737,10 +737,10 @@
       }
     };
 
-    xmlHttpRequest.open("GET", endPoint, true);
-    xmlHttpRequest.setRequestHeader("Content-Type", type);
-    xmlHttpRequest.setRequestHeader("Authorization", "Bearer " + jwt);
-    xmlHttpRequest.send("");
+    xmlHttpRequest.open('GET', endPoint, true);
+    xmlHttpRequest.setRequestHeader('Content-Type', type);
+    xmlHttpRequest.setRequestHeader('Authorization', "Bearer " + jwt);
+    xmlHttpRequest.send('');
   };
   
 })(window);
