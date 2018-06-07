@@ -157,7 +157,7 @@
     };
   }
 
-  function presentedForm(){
+  function diagnosticForm(){
     return {
       url: {value: ''},
       contenttype: {value: ''},
@@ -258,17 +258,17 @@
   }
   
   function buildForms(form){
-    var presentedForms = new Array();
+    var diagnosticForms = new Array();
     
     if(form != null && Array.isArray(form)) {
       for (var i = 0; i < form.length; i++) {
-        var presentedForm = new presentedForm();
-        presentedForm.url = form.url;
-        presentedForm.contenttype = form.contentType;
-        presentedForms.push(presentedForm);        
+        var diagForm = new diagnosticForm();
+        diagForm.url = form.url;
+        diagForm.contenttype = form.contentType;
+        diagnosticForms.push(diagForm);        
       }
     }      
-    return presentedForms;
+    return diagnosticForms;
   }
     
   function buildMedicationOrderList(medicOrders){
