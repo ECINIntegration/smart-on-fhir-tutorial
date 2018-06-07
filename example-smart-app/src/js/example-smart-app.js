@@ -589,8 +589,34 @@
     }
   }
   
-  function openDocInNewWindow(token, patient, url)
+  function getDocument(accessToken, url, type, patientId) {
+    var jwt = accessToken;
+    var endPoint = = url + '?patient=' + patientId;
+    
+    var xmlHttpRequest = new XMLHttpRequest();
+    
+    xmlHttpRequest.onreadystatechange = function () {
+      if (xmlHttpRequest.readyState == 4) {//Done
+        alert("status: " + xmlHttpRequest.status);
+        if (this.status === 200) {
+          // this.response is a Blob, because we set responseType above
+          //var data_url = URL.createObjectURL(this.response);
+          //document.querySelector('#output-frame-id').src = data_url;
+        }else{
+          //console.error('no doc');
+        }
+      }
+    }
+
+    xmlHttpRequest.open("GET", endPoint, false);
+    xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
+    xmlHttpRequest.setRequestHeader("Authorization", "Bearer " + jwt);
+    xmlHttpRequest.send("");
+  }
+  
+  function openDocInNewWindow(token, patientId, url, type)
   {
+    /*
     if(sessionStorage != null) {
       var token = sessionStorage.tokenResponse;
       
@@ -599,6 +625,22 @@
         patientId: tokenResponse.patient
       };    
     }
+    */
+    
+    /*
+    var openUrl = url + '?patient=' + patientId;
+    
+    var xmlHttpRequest = new XMLHttpRequest();    
+    xmlHttpRequest.open('GET', openUrl);
+    xmlHttpRequest.onreadystatehandler = readyStateHandler;
+    xmlHttpRequest.responseType = type;
+    xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
+    xmlHttpRequest.send();
+    
+  }
+  
+  function readyStateHandler() {
+    */
   }
   
   window.drawVisualization = function(p) {
