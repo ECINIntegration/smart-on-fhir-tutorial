@@ -41,6 +41,7 @@
           type: 'MedicationOrder'
         });
         
+        /*
         var ms = smart.patient.api.fetchAll({
           type: 'MedicationStatement'
         });
@@ -48,14 +49,13 @@
         var allobv = smart.patient.api.fetchAll({
           type: 'Observation'
         });
-        /*
         var docref = smart.patient.api.fetchAll({
           type: 'DocumentReference'
         });*/
         
-        $.when(pt, obv, im, dr, ma, mo, ms, allobv).fail(onError);
+        $.when(pt, obv, im, dr, ma, mo, ms).fail(onError);
 
-        $.when(pt, obv, im, dr, ma, mo, ms, allobv).done(function(patient, obv, imm, diagRpt, medicAdmin, medicOrder, medicStmnt, allobv) {
+        $.when(pt, obv, im, dr, ma, mo, ms).done(function(patient, obv, imm, diagRpt, medicAdmin, medicOrder, medicStmnt) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
@@ -494,7 +494,7 @@
             var linkText = document.createTextNode("Form " + (j + 1).toString());
             a.appendChild(linkText);
             a.title = "Form " + (j + 1).toString();
-            a.href = 'javascript: getDocument("' + diagRpts[i].accesstkn + '", "' +  diagRpts[i].forms[j].url + '", "' +  diagRpts[i].forms[j].contenttype + '", "' +  diagRpts[i].patid + '"); return false;'
+            a.href = 'javascript: getDocument("' + diagRpts[i].accesstkn + '", "' +  diagRpts[i].forms[j].url + '", "' +  diagRpts[i].forms[j].contenttype + '", "' +  diagRpts[i].patid + '");'
             //a.onclick = function() {getDocument(diagRpts[i].accesstkn, diagRpts[i].forms[j].url, diagRpts[i].forms[j].contenttype, diagRpts[i].patid)};
             cell.appendChild(a);
             var space = document.createTextNode(" ");
