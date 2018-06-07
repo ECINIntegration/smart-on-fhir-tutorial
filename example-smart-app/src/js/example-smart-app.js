@@ -589,6 +589,18 @@
     }
   }
   
+  function openDocInNewWindow(token, patient, url)
+  {
+    if(sessionStorage != null) {
+      var token = sessionStorage.tokenResponse;
+      
+      var fhirClientParams = {
+        serviceUrl: state.provider.url,
+        patientId: tokenResponse.patient
+      };    
+    }
+  }
+  
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
