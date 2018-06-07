@@ -641,7 +641,7 @@
       tbl.appendChild(row); 
     }
   }
-  
+  /*
   function getDocument(accessToken, url, type, patientId) {
     var jwt = accessToken;
     var endPoint = url + '?patient=' + patientId;
@@ -666,7 +666,7 @@
     xmlHttpRequest.setRequestHeader("Authorization", "Bearer " + jwt);
     xmlHttpRequest.send("");
   }
-  
+  */
   function openDocInNewWindow(token, patientId, url, type)
   {
     /*
@@ -716,5 +716,25 @@
     buildMedicationAdministrationTable(p.medicAdmins);
     buildMedicationStatementTable(p.medicStmnts)
   };
+
+  window.getDocument = function(accessToken, url, type, patientId) {
+    
+    var jwt = accessToken;
+    var endPoint = url + '?patient=' + patientId;
+    
+    var xmlHttpRequest = new XMLHttpRequest();
+    
+    xmlHttpRequest.onreadystatechange = function () {
+      if (xmlHttpRequest.readyState == 4) {//Done
+        alert("status: " + xmlHttpRequest.status);
+        if (this.status === 200) {
+          // this.response is a Blob, because we set responseType above
+          //var data_url = URL.createObjectURL(this.response);
+          //document.querySelector('#output-frame-id').src = data_url;
+        }else{
+          //console.error('no doc');
+        }
+      }
+    };
 
 })(window);
