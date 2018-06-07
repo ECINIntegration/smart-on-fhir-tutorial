@@ -591,7 +591,7 @@
   
   function getDocument(accessToken, url, type, patientId) {
     var jwt = accessToken;
-    var endPoint = = url + '?patient=' + patientId;
+    var endPoint = url + '?patient=' + patientId;
     
     var xmlHttpRequest = new XMLHttpRequest();
     
