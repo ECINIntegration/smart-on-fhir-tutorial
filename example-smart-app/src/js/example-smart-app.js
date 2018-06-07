@@ -485,11 +485,11 @@
         cell1.style.verticalAlign = "top";
         row0.appendChild(cell1);
         
-        if(diagRpts.forms != null && Array.isArray(diagRpts.forms)) {
+        if(diagRpts[i].forms != null && Array.isArray(diagRpts[i].forms)) {
           var cell = document.createElement('td');
           cell.style.textAlign = "left";
           cell.style.verticalAlign = "top";
-          for (var j = 0; j < diagRpts.forms.length; j++) {
+          for (var j = 0; j < diagRpts[i].forms.length; j++) {
             var a = document.createElement('a');
             var linkText = document.createTextNode("Form " + (j + 1).toString());
             a.appendChild(linkText);
