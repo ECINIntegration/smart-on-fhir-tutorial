@@ -485,6 +485,24 @@
         cell1.style.verticalAlign = "top";
         row0.appendChild(cell1);
         
+        if(diagRpts.forms != null && Array.isArray(diagRpts.forms)) {
+          var cell = document.createElement('td');
+          cell.style.textAlign = "left";
+          cell.style.verticalAlign = "top";
+          for (var i = 0; i < diagRpts.forms.length; i++) {
+            var a = document.createElement('a');
+            var linkText = document.createTextNode("Form " + (i + 1).toString());
+            a.appendChild(linkText);
+            a.title = "Form " + (i + 1).toString();
+            a.href = "#";
+            a.onclick = function() {getDocument(diagRpts.accesstkn, diagRpts.forms[i].url, diagRpts.forms[i].contenttype, diagRpts.patid))};
+            cell.appendChild(a);
+            var space = document.createTextNode(" ");
+            cell.appendChild(space);
+          }
+          row0.appendChild(cell);
+        }
+        
         tbl.appendChild(row0); 
       }
     }else{
