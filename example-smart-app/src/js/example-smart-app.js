@@ -494,7 +494,7 @@
             var linkText = document.createTextNode("Form " + (j + 1).toString());
             a.appendChild(linkText);
             a.title = "Form " + (j + 1).toString();
-            a.href = 'getDocument("' + diagRpts[i].accesstkn + '", "' +  diagRpts[i].forms[j].url + '", "' +  diagRpts[i].forms[j].contenttype + '", "' +  diagRpts[i].patid + '"); return false;'
+            a.href = 'javascript: getDocument("' + diagRpts[i].accesstkn + '", "' +  diagRpts[i].forms[j].url + '", "' +  diagRpts[i].forms[j].contenttype + '", "' +  diagRpts[i].patid + '"); return false;'
             //a.onclick = function() {getDocument(diagRpts[i].accesstkn, diagRpts[i].forms[j].url, diagRpts[i].forms[j].contenttype, diagRpts[i].patid)};
             cell.appendChild(a);
             var space = document.createTextNode(" ");
