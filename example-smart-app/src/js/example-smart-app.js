@@ -45,9 +45,13 @@
                     type: 'MedicationStatement'
                   });
 
-        $.when(pt, obv, im, dr, ma, mo, ms).fail(onError);
+        var allObv = smart.patient.api.fetchAll({
+          type: 'Observation'
+          });
+        
+        $.when(pt, obv, im, dr, ma, mo, ms, allObv).fail(onError);
 
-        $.when(pt, obv, im, dr, ma, mo, ms).done(function(patient, obv, imm, diagRpt, medicAdmin, medicOrder, medicStmnt) {
+        $.when(pt, obv, im, dr, ma, mo, ms, allObv).done(function(patient, obv, imm, diagRpt, medicAdmin, medicOrder, medicStmnt, allObv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
