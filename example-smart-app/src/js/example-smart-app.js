@@ -491,7 +491,6 @@
           cell.style.verticalAlign = "top";
           
           var tkn = diagRpts[i].accesstkn;
-          var pid = diagRpts[i].patid;
           
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
             var url = diagRpts[i].forms[j].url;
@@ -500,8 +499,8 @@
             var linkText = document.createTextNode('Form ' + (j + 1).toString() + ' (' + type + ')');
             a.appendChild(linkText);
             a.title = 'Form ' + (j + 1).toString() + ' (' + type + ')';
-            a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '", "' +  pid + '");'
-            //a.onclick = function() {getDocument(tkn, url, type, pid)};
+            a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+            //a.onclick = function() {getDocument(tkn, url, type)};
             cell.appendChild(a);
             var space = document.createTextNode(" ");
             cell.appendChild(space);
@@ -647,32 +646,7 @@
       tbl.appendChild(row); 
     }
   }
-  /*
-  function getDocument(accessToken, url, type, patientId) {
-    var jwt = accessToken;
-    var endPoint = url + '?patient=' + patientId;
-    
-    var xmlHttpRequest = new XMLHttpRequest();
-    
-    xmlHttpRequest.onreadystatechange = function () {
-      if (xmlHttpRequest.readyState == 4) {//Done
-        alert("status: " + xmlHttpRequest.status);
-        if (this.status === 200) {
-          // this.response is a Blob, because we set responseType above
-          //var data_url = URL.createObjectURL(this.response);
-          //document.querySelector('#output-frame-id').src = data_url;
-        }else{
-          //console.error('no doc');
-        }
-      }
-    }
 
-    xmlHttpRequest.open("GET", endPoint, false);
-    xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
-    xmlHttpRequest.setRequestHeader("Authorization", "Bearer " + jwt);
-    xmlHttpRequest.send("");
-  }
-  */
   function openDocInNewWindow(token, patientId, url, type)
   {
     /*
@@ -723,10 +697,9 @@
     buildMedicationStatementTable(p.medicStmnts)
   };
 
-  window.getDocument = function(accessToken, url, type, patientId) {
+  window.getDocument = function(accessToken, url, type) {
     
     var jwt = accessToken;
-    var endPoint = url + '?patient=' + patientId;
     
     var xmlHttpRequest = new XMLHttpRequest();
     
@@ -743,7 +716,7 @@
       }
     };
 
-    xmlHttpRequest.open('GET', endPoint, true);
+    xmlHttpRequest.open('GET', url, true);
     xmlHttpRequest.setRequestHeader('Content-Type', type);
     xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + jwt);
     xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
