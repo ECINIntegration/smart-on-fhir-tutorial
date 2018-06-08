@@ -744,6 +744,30 @@
   function buildObservations2Table(observations) {
     var tbl = document.getElementById('tblObservations2');
     
+    var r0 = document.createElement('tr');
+    var th0 = document.createElement('th');
+    th0.innerHTML =  'Category';
+    r0.appendChild(th0);
+    var th1 = document.createElement('th');
+    th1.innerHTML =  'Date';
+    r0.appendChild(th1);
+    var th2 = document.createElement('th');
+    th2.innerHTML =  'Code';
+    r0.appendChild(th2);
+    var th3 = document.createElement('th');
+    th3.innerHTML =  'Value';
+    r0.appendChild(th3);
+    var th4 = document.createElement('th');
+    th4.innerHTML =  'Unit';
+    r0.appendChild(th4);
+    var th5 = document.createElement('th');
+    th5.innerHTML =  'Codeable Value';
+    r0.appendChild(th5);
+    var th6 = document.createElement('th');
+    th6.innerHTML =  'Detail;
+    r0.appendChild(th6);
+    tbl.appendChild(r0);
+    
     if(observations != null && Array.isArray(observations) && observations.length > 0) {
       for (var i = 0; i < observations.length; i++) {
         var row0 = document.createElement('tr');
@@ -798,6 +822,7 @@
       cell.textContent = "N/A";
       cell.style.textAlign = "center";
       cell.style.verticalAlign = "top";
+      cell.colSpan = 7;
       row.appendChild(cell);
       tbl.appendChild(row); 
     }
