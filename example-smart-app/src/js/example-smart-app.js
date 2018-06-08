@@ -495,9 +495,9 @@
           
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
             var type = diagRpts[i].forms[j].contenttype;
-            if(type == 'text/html')
-            {
-              //html docs only
+            //if(type == 'text/html')
+            //{
+              ////html docs only
               k = k + 1;
               var url = diagRpts[i].forms[j].url;
               var a = document.createElement('a');
@@ -516,7 +516,7 @@
               cell.appendChild(a);
               var space = document.createTextNode(" ");
               cell.appendChild(space);
-            }
+            //}
           }
           row0.appendChild(cell);
         }
