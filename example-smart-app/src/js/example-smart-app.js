@@ -490,12 +490,16 @@
           cell.style.textAlign = "left";
           cell.style.verticalAlign = "top";
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
+            var url = diagRpts[i].forms[j].url;
+            var tkn = diagRpts[i].accesstkn;
+            var type = diagRpts[i].forms[j].contenttype;
+            var pid = diagRpts[i].patid;
             var a = document.createElement('a');
-            var linkText = document.createTextNode("Form " + (j + 1).toString());
+            var linkText = document.createTextNode('Form ' + (j + 1).toString() + ' (' + type + ')');
             a.appendChild(linkText);
-            a.title = "Form " + (j + 1).toString();
-            a.href = 'javascript: getDocument("' + diagRpts[i].accesstkn + '", "' +  diagRpts[i].forms[j].url + '", "' +  diagRpts[i].forms[j].contenttype + '", "' +  diagRpts[i].patid + '");'
-            //a.onclick = function() {getDocument(diagRpts[i].accesstkn, diagRpts[i].forms[j].url, diagRpts[i].forms[j].contenttype, diagRpts[i].patid)};
+            a.title = 'Form ' + (j + 1).toString() + ' (' + type + ')');
+            a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '", "' +  pid + '");'
+            //a.onclick = function() {getDocument(tkn, url, type, pid)};
             cell.appendChild(a);
             var space = document.createTextNode(" ");
             cell.appendChild(space);
@@ -740,6 +744,7 @@
     xmlHttpRequest.open('GET', endPoint, true);
     xmlHttpRequest.setRequestHeader('Content-Type', type);
     xmlHttpRequest.setRequestHeader('Authorization', "Bearer " + jwt);
+    xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
     xmlHttpRequest.send('');
   };
   
