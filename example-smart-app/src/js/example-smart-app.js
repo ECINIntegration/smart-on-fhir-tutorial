@@ -676,11 +676,10 @@
     
     xmlHttpRequest.onreadystatechange = function () {
       if (xmlHttpRequest.readyState == 4) {//Done
-        alert("status: " + xmlHttpRequest.status);
-        if (this.status === 200) {
-          // this.response is a Blob, because we set responseType above
-          //var data_url = URL.createObjectURL(this.response);
-          //document.querySelector('#output-frame-id').src = data_url;
+        console.log('xmlHttpRequest.status: ' + xmlHttpRequest.status);
+        if (xmlHttpRequest.status === 200) {
+          var data = URL.createObjectURL(xmlHttpRequest.response);
+          document.querySelector('#ifrmDoc').src = data;
         }else{
           console.error('No document returned');
         }
