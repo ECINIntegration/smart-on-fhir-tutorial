@@ -495,7 +495,7 @@
           
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
             var type = diagRpts[i].forms[j].contenttype;
-            /if(type == 'text/html')
+            if(type == 'text/html')
             {
               //html docs only
               k = k + 1;
