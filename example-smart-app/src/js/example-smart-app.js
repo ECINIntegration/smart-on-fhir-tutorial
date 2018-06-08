@@ -420,14 +420,18 @@
           obsv.code = '';
         }
         
-        if(allObv[i].valueQuantity != null){
+        if(allObv[i].valueQuantity != null && allObv[i].valueQuantity.unit != null){
           obsv.unit = allObv[i].valueQuantity.unit;
-          obsv.value = allObv[i].valueQuantity.value;
         }else{
           obsv.unit = '';
+        }
+        
+        if(allObv[i].valueQuantity != null && allObv[i].valueQuantity.value != null){
+          obsv.value = allObv[i].valueQuantity.value;
+        }else{
           obsv.value = '';
         }
-                
+        
         if(allObv[i].valueCodeableConcept != null){
           obsv.codeablevalue = allObv[i].valueCodeableConcept.text;
         }else{
