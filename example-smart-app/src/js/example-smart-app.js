@@ -408,13 +408,17 @@
           obsv.category = '';
         }
         
+        if(allObv[i].effectiveDateTime){
+          obsv.date = allObv[i].effectiveDateTime;
+        }else{
+          obsv.date = '';
+        }
+        
         if(allObv[i].code != null){
           obsv.code = allObv[i].code.text;
         }else{
           obsv.code = '';
         }
-        
-        obsv.date = allObv[i].effectiveDateTime;
         
         if(allObv[i].valueQuantity != null){
           obsv.unit = allObv[i].valueQuantity.unit;
