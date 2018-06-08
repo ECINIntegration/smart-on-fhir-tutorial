@@ -504,8 +504,14 @@
               var linkText = document.createTextNode('Form ' + k.toString());
               a.appendChild(linkText);
               a.title = 'Form ' + k.toString();
-              a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+              //a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+              a.href = '#';
               //a.onclick = function() {getDocument(tkn, url, type)};
+              a.onclick = (function(tkn, url, type){
+                return function(){
+                  getDocument(tkn, url, type);
+                }
+              })(tkn, url, type);
               cell.appendChild(a);
               var space = document.createTextNode(" ");
               cell.appendChild(space);
