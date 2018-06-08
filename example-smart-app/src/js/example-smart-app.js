@@ -409,7 +409,7 @@
           obsv.code = allObv[i].code.text;
         }
         
-        obsv.date = allObv[i].effectiveDateTimet;
+        obsv.date = allObv[i].effectiveDateTime;
         
         if(allObv[i].valueQuantity != null){
           obsv.unit = allObv[i].valueQuantity.unit;
