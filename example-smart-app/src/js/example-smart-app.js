@@ -827,7 +827,7 @@
     th5.innerHTML =  'Codeable Value';
     r0.appendChild(th5);
     var th6 = document.createElement('th');
-    th6.innerHTML =  'Detail;
+    th6.innerHTML =  'Detail';
     r0.appendChild(th6);
     tbl.appendChild(r0);
     
