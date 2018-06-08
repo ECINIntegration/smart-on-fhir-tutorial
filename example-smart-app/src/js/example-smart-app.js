@@ -489,15 +489,17 @@
           var cell = document.createElement('td');
           cell.style.textAlign = "left";
           cell.style.verticalAlign = "top";
+          
+          var tkn = diagRpts[i].accesstkn;
+          var pid = diagRpts[i].patid;
+          
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
             var url = diagRpts[i].forms[j].url;
-            var tkn = diagRpts[i].accesstkn;
             var type = diagRpts[i].forms[j].contenttype;
-            var pid = diagRpts[i].patid;
             var a = document.createElement('a');
             var linkText = document.createTextNode('Form ' + (j + 1).toString() + ' (' + type + ')');
             a.appendChild(linkText);
-            a.title = 'Form ' + (j + 1).toString() + ' (' + type + ')');
+            a.title = 'Form ' + (j + 1).toString() + ' (' + type + ')';
             a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '", "' +  pid + '");'
             //a.onclick = function() {getDocument(tkn, url, type, pid)};
             cell.appendChild(a);
@@ -743,7 +745,7 @@
 
     xmlHttpRequest.open('GET', endPoint, true);
     xmlHttpRequest.setRequestHeader('Content-Type', type);
-    xmlHttpRequest.setRequestHeader('Authorization', "Bearer " + jwt);
+    xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + jwt);
     xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
     xmlHttpRequest.send('');
   };
