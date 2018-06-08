@@ -550,6 +550,18 @@
   function buildDiagnosticsReportTable(diagRpts) {
     var tbl = document.getElementById('tblDiagnosticsReports');
     
+    var r0 = document.createElement('tr');
+    var th0 = document.createElement('th');
+    th0.innerHTML =  'Status';
+    r0.appendChild(th0);
+    var th1 = document.createElement('th');
+    th1.innerHTML =  'Result';
+    r0.appendChild(th1);
+    var th2 = document.createElement('th');
+    th2.innerHTML =  'Document Link';
+    r0.appendChild(th2);
+    tbl.appendChild(r0);
+    
     if(diagRpts != null && Array.isArray(diagRpts) && diagRpts.length > 0) {
       for (var i = 0; i < diagRpts.length; i++) {
         var row0 = document.createElement('tr');
@@ -610,6 +622,7 @@
       cell.textContent = "N/A";
       cell.style.textAlign = "center";
       cell.style.verticalAlign = "top";
+      cell.colSpan = 3;
       row.appendChild(cell);
       tbl.appendChild(row); 
     }
@@ -617,6 +630,18 @@
 
   function buildMedicationOrderTable(medicOrders) {
     var tbl = document.getElementById('tblMedicationOrders');
+    
+    var r0 = document.createElement('tr');
+    var th0 = document.createElement('th');
+    th0.innerHTML =  'Status';
+    r0.appendChild(th0);
+    var th1 = document.createElement('th');
+    th1.innerHTML =  'Date';
+    r0.appendChild(th1);
+    var th2 = document.createElement('th');
+    th2.innerHTML =  'Detail';
+    r0.appendChild(th2);
+    tbl.appendChild(r0);
     
     if(medicOrders != null && Array.isArray(medicOrders) && medicOrders.length > 0) {
       for (var i = 0; i < medicOrders.length; i++) {
@@ -648,6 +673,7 @@
       cell.textContent = "N/A";
       cell.style.textAlign = "center";
       cell.style.verticalAlign = "top";
+      cell.colSpan = 3;
       row.appendChild(cell);
       tbl.appendChild(row); 
     }
@@ -655,6 +681,21 @@
 
   function buildMedicationAdministrationTable(medicAdmins) {
     var tbl = document.getElementById('tblMedicationAdministration');
+    
+    var r0 = document.createElement('tr');
+    var th0 = document.createElement('th');
+    th0.innerHTML =  'Status';
+    r0.appendChild(th0);
+    var th1 = document.createElement('th');
+    th1.innerHTML =  'Date';
+    r0.appendChild(th1);
+    var th2 = document.createElement('th');
+    th2.innerHTML =  'Dosage';
+    r0.appendChild(th2);
+    var th3 = document.createElement('th');
+    th3.innerHTML =  'Detail';
+    r0.appendChild(th3);
+    tbl.appendChild(r0);
     
     if(medicAdmins != null && Array.isArray(medicAdmins) && medicAdmins.length > 0) {
       for (var i = 0; i < medicAdmins.length; i++) {
@@ -692,6 +733,7 @@
       cell.textContent = "N/A";
       cell.style.textAlign = "center";
       cell.style.verticalAlign = "top";
+      cell.colSpan = 4;
       row.appendChild(cell);
       tbl.appendChild(row); 
     }
@@ -699,6 +741,21 @@
 
   function buildMedicationStatementTable(medicStmnts) {
     var tbl = document.getElementById('tblMedicationStatements');
+        
+    var r0 = document.createElement('tr');
+    var th0 = document.createElement('th');
+    th0.innerHTML =  'Status';
+    r0.appendChild(th0);
+    var th1 = document.createElement('th');
+    th1.innerHTML =  'Date';
+    r0.appendChild(th1);
+    var th2 = document.createElement('th');
+    th2.innerHTML =  'Dosage';
+    r0.appendChild(th2);
+    var th3 = document.createElement('th');
+    th3.innerHTML =  'Detail';
+    r0.appendChild(th3);
+    tbl.appendChild(r0);
     
     if(medicStmnts != null && Array.isArray(medicStmnts) && medicStmnts.length > 0) {
       for (var i = 0; i < medicStmnts.length; i++) {
@@ -736,6 +793,7 @@
       cell.textContent = "N/A";
       cell.style.textAlign = "center";
       cell.style.verticalAlign = "top";
+      cell.colSpan = 4;
       row.appendChild(cell);
       tbl.appendChild(row); 
     }
