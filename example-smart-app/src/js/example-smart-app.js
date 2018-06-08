@@ -201,6 +201,7 @@
       unit: {value: ''},
       value: {value: ''},
       text: {value: ''},
+      codeablevalue: {value: ''},
     };
   }
   
@@ -403,10 +404,14 @@
         
         if(allObv[i].category != null){
           obsv.category = allObv[i].category.text;
+        }else{
+          obsv.category = '';
         }
         
         if(allObv[i].code != null){
           obsv.code = allObv[i].code.text;
+        }else{
+          obsv.code = '';
         }
         
         obsv.date = allObv[i].effectiveDateTime;
@@ -414,10 +419,21 @@
         if(allObv[i].valueQuantity != null){
           obsv.unit = allObv[i].valueQuantity.unit;
           obsv.value = allObv[i].valueQuantity.value;
+        }else{
+          obsv.unit = '';
+          obsv.value = '';
+        }
+                
+        if(allObv[i].valueCodeableConcept != null){
+          obsv.codeablevalue = allObv[i].valueCodeableConcept.text;
+        }else{
+          obsv.codeablevalue = '';
         }
         
         if(allObv[i].text != null){
           obsv.text = allObv[i].text.div;
+        }else{
+          obsv.text = '';
         }
         
         observations.push(obsv);
@@ -745,10 +761,16 @@
         row0.appendChild(cell4);
         
         var cell5 = document.createElement('td');
-        cell5.innerHTML = observations[i].text;
+        cell5.innerHTML = observations[i].codeablevalue;
         cell5.style.textAlign = "left";
         cell5.style.verticalAlign = "top";
         row0.appendChild(cell5);
+        
+        var cell6 = document.createElement('td');
+        cell6.innerHTML = observations[i].text;
+        cell6.style.textAlign = "left";
+        cell6.style.verticalAlign = "top";
+        row0.appendChild(cell6);
         
         tbl.appendChild(row0); 
       }
