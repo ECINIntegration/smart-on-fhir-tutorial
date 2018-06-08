@@ -414,7 +414,7 @@
           obsv.date = '';
         }
         
-        if(allObv[i].code != null){
+        if(allObv[i].code != null && allObv[i].code.text != null){
           obsv.code = allObv[i].code.text;
         }else{
           obsv.code = '';
