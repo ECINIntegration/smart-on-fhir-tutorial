@@ -494,17 +494,16 @@
           var tkn = diagRpts[i].accesstkn;
           
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
-            var k = 0
             var type = diagRpts[i].forms[j].contenttype;
             if(type == 'text/html')
             {
               //html docs only
-              k = k =  1;
+              k = k + 1;
               var url = diagRpts[i].forms[j].url;
               var a = document.createElement('a');
-              var linkText = document.createTextNode('Form ' + (k + 1).toString());
+              var linkText = document.createTextNode('Form ' + k.toString());
               a.appendChild(linkText);
-              a.title = 'Form ' + (k + 1).toString();
+              a.title = 'Form ' + k.toString();
               a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               //a.onclick = function() {getDocument(tkn, url, type)};
               cell.appendChild(a);
@@ -687,7 +686,7 @@
         if (xmlHttpRequest.status === 200) {
           var content = xmlHttpRequest.response;
           //document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(content);
-          document.getElementById('ifrmDoc').srcdoc = 'data:text/html;charset=utf-8,' + escape(content);
+          document.getElementById('ifrmDoc').srcdoc = content;
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
