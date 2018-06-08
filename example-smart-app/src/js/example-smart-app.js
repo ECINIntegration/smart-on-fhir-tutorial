@@ -556,14 +556,13 @@
         cell1.style.verticalAlign = "top";
         row0.appendChild(cell1);
         
+        var cell = document.createElement('td');
+        cell.style.textAlign = "left";
+        cell.style.verticalAlign = "top";
+        
         if(diagRpts[i].forms != null && Array.isArray(diagRpts[i].forms)) {
-          var cell = document.createElement('td');
-          cell.style.textAlign = "left";
-          cell.style.verticalAlign = "top";
-          
           var k = 0
           var tkn = diagRpts[i].accesstkn;
-          
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
             var type = diagRpts[i].forms[j].contenttype;
             if(type == 'text/html')
@@ -589,6 +588,7 @@
               cell.appendChild(space);
             }
           }
+          
           row0.appendChild(cell);
         }
         
