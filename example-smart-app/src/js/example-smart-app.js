@@ -646,35 +646,6 @@
       tbl.appendChild(row); 
     }
   }
-
-  function openDocInNewWindow(token, patientId, url, type)
-  {
-    /*
-    if(sessionStorage != null) {
-      var token = sessionStorage.tokenResponse;
-      
-      var fhirClientParams = {
-        serviceUrl: state.provider.url,
-        patientId: tokenResponse.patient
-      };    
-    }
-    */
-    
-    /*
-    var openUrl = url + '?patient=' + patientId;
-    
-    var xmlHttpRequest = new XMLHttpRequest();    
-    xmlHttpRequest.open('GET', openUrl);
-    xmlHttpRequest.onreadystatehandler = readyStateHandler;
-    xmlHttpRequest.responseType = type;
-    xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + token);
-    xmlHttpRequest.send();
-    
-  }
-  
-  function readyStateHandler() {
-    */
-  }
   
   window.drawVisualization = function(p) {
     $('#holder').show();
@@ -711,16 +682,17 @@
           //var data_url = URL.createObjectURL(this.response);
           //document.querySelector('#output-frame-id').src = data_url;
         }else{
-          //console.error('no doc');
+          console.error('No document returned');
         }
       }
     };
 
     xmlHttpRequest.open('GET', url, true);
-    xmlHttpRequest.setRequestHeader('Content-Type', type);
+    //xmlHttpRequest.setRequestHeader('Content-Type', type);
     xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + jwt);
     //xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
-    xmlHttpRequest.setRequestHeader('Accept', 'text/html');
+    //xmlHttpRequest.setRequestHeader('Accept', 'text/html');
+    xmlHttpRequest.setRequestHeader('Accept', type);
     xmlHttpRequest.send('');
   };
   
