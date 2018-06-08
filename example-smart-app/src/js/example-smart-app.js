@@ -503,9 +503,18 @@
   function buildImmunizationsTable(imms) {
     
     var tbl = document.getElementById('tblImmunizations');
+
+    var r0 = document.createElement('tr');
+    var th0 = document.createElement('th');
+    th0.innerHTML =  'Date';
+    r0.appendChild(th0);
+    var th1 = document.createElement('th');
+    th1.innerHTML =  'Detail';
+    r0.appendChild(th1);
+    tbl.appendChild(r0);
     
     if(imms != null && Array.isArray(imms) && imms.length > 0) {
-      
+
       for (var i = 0; i < imms.length; i++) {
         
         var row0 = document.createElement('tr');
@@ -530,6 +539,7 @@
       cell.textContent = "N/A";
       cell.style.textAlign = "center";
       cell.style.verticalAlign = "top";
+      cell.colSpan = 2;
       row.appendChild(cell);
       tbl.appendChild(row);
       
