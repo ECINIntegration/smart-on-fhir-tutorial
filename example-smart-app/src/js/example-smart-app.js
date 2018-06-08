@@ -681,8 +681,8 @@
           //var data = URL.createObjectURL(xmlHttpRequest.response);
           //document.querySelector('#ifrmDoc').src = data;
           var content = xmlHttpRequest.response;
-          //document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(html_string);
-          document.getElementById('ifrmDoc').src = content;
+          document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(content);
+          //document.getElementById('ifrmDoc').src = content;
         }else{
           console.error('No document returned');
         }
