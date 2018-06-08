@@ -706,6 +706,8 @@
     //xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
     xmlHttpRequest.setRequestHeader('Accept', type);
     xmlHttpRequest.send('');
+    
+    return false; //no need to go to another page yet
   };
   
 })(window);
