@@ -506,12 +506,13 @@
               a.title = 'Form ' + k.toString();
               //a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
-              //a.onclick = function() {getDocument(tkn, url, type)};
+
               a.onclick = (function(tkn, url, type){
                 return function(){
                   getDocument(tkn, url, type);
                 }
-              })(tkn, url, type);
+              })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
+              
               cell.appendChild(a);
               var space = document.createTextNode(" ");
               cell.appendChild(space);
