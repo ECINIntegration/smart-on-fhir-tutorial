@@ -719,7 +719,8 @@
     xmlHttpRequest.open('GET', url, true);
     xmlHttpRequest.setRequestHeader('Content-Type', type);
     xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + jwt);
-    xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
+    //xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
+    xmlHttpRequest.setRequestHeader('Accept', 'DiagnosticReport.presentedForm.contentType');
     xmlHttpRequest.send('');
   };
   
