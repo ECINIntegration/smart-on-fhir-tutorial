@@ -44,18 +44,19 @@
         var ms = smart.patient.api.fetchAll({
           type: 'MedicationStatement'
         });
-        
-        /*
+
         var allobv = smart.patient.api.fetchAll({
           type: 'Observation'
         });
+        
+        /*
         var docref = smart.patient.api.fetchAll({
           type: 'DocumentReference'
         });*/
         
-        $.when(pt, obv, im, dr, ma, mo, ms).fail(onError);
+        $.when(pt, obv, im, dr, ma, mo, ms, allobv).fail(onError);
 
-        $.when(pt, obv, im, dr, ma, mo, ms).done(function(patient, obv, imm, diagRpt, medicAdmin, medicOrder, medicStmnt) {
+        $.when(pt, obv, im, dr, ma, mo, ms, allobv).done(function(patient, obv, imm, diagRpt, medicAdmin, medicOrder, medicStmnt, allObv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
           var dob = new Date(patient.birthDate);
@@ -105,6 +106,7 @@
           p.medicOrders = buildMedicationOrderList(medicOrder);
           p.medicAdmins = buildMedicationAdministrationList(medicAdmin);
           p.medicStmnts = buildMedicationStatementList(medicStmnt);
+          p.allObvs = buildAllObservationsList(allObv);
 
           ret.resolve(p);
         });
@@ -136,6 +138,7 @@
       medicOrders: {value: ''},
       medicAdmins: {value: ''},
       medicStmnts: {value: ''},
+      allObvs: {value: ''},
     };
   }
 
@@ -187,6 +190,17 @@
       dosage: {value: ''},
       text: {value: ''},
       status: {value: ''},
+    };
+  }
+  
+  function Observation(){
+    return {
+      date: {value: ''},
+      category: {value: ''},
+      code: {value: ''},
+      unit: {value: ''},
+      value: {value: ''},
+      text: {value: ''},
     };
   }
   
@@ -378,6 +392,39 @@
       }
     }
     return statementDosages;
+  }
+  
+  function buildAllObservationsList(allObv){
+    var observations = new Array();
+    
+    if(allObv != null && Array.isArray(allObv)) {
+      for (var i = 0; i < allObv.length; i++) {
+        var obsv = new Observation();
+        
+        if(allObv[i].category != null){
+          obsv.category = allObv[i].category.text;
+        }
+        
+        if(allObv[i].code != null){
+          obsv.code = allObv[i].code.text;
+        }
+        
+        obsv.date = allObv[i].effectiveDateTimet;
+        
+        if(allObv[i].valueQuantity != null){
+          obsv.unit = allObv[i].valueQuantity.unit;
+          obsv.value = allObv[i].valueQuantity.value;
+        }
+        
+        if(allObv[i].text != null){
+          obsv.text = allObv[i].text.div;
+        }
+        
+        observations.push(obsv);
+      }
+    }
+    
+    return observations;
   }
   
   function getBloodPressureValue(BPObservations, typeOfPressure) {
@@ -660,6 +707,62 @@
     }
   }
   
+    function buildObservations2Table(observations) {
+    var tbl = document.getElementById('tblObservations2');
+    
+    if(observations != null && Array.isArray(observations) && observations.length > 0) {
+      for (var i = 0; i < observations.length; i++) {
+        var row0 = document.createElement('tr');
+        
+        var cell0 = document.createElement('td');
+        cell0.innerHTML = observations[i].category;
+        cell0.style.textAlign = "left";
+        cell0.style.verticalAlign = "top";
+        row0.appendChild(cell0);
+
+        var cell1 = document.createElement('td');
+        cell1.innerHTML = observations[i].date;
+        cell1.style.textAlign = "left";
+        cell1.style.verticalAlign = "top";
+        row0.appendChild(cell1);
+
+        var cell2 = document.createElement('td');
+        cell2.innerHTML = observations[i].code;
+        cell2.style.textAlign = "left";
+        cell2.style.verticalAlign = "top";
+        row0.appendChild(cell2);
+
+        var cell3 = document.createElement('td');
+        cell3.innerHTML = observations[i].value;
+        cell3.style.textAlign = "left";
+        cell3.style.verticalAlign = "top";
+        row0.appendChild(cell3);
+
+        var cell4 = document.createElement('td');
+        cell4.innerHTML = observations[i].unit;
+        cell4.style.textAlign = "left";
+        cell4.style.verticalAlign = "top";
+        row0.appendChild(cell4);
+        
+        var cell5 = document.createElement('td');
+        cell5.innerHTML = observations[i].text;
+        cell5.style.textAlign = "left";
+        cell5.style.verticalAlign = "top";
+        row0.appendChild(cell5);
+        
+        tbl.appendChild(row0); 
+      }
+    }else{
+      var row = document.createElement('tr');
+      var cell = document.createElement('td');
+      cell.textContent = "N/A";
+      cell.style.textAlign = "center";
+      cell.style.verticalAlign = "top";
+      row.appendChild(cell);
+      tbl.appendChild(row); 
+    }
+  }
+  
   window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
@@ -678,7 +781,8 @@
     buildImmunizationsTable(p.imms);   
     buildMedicationOrderTable(p.medicOrders);
     buildMedicationAdministrationTable(p.medicAdmins);
-    buildMedicationStatementTable(p.medicStmnts)
+    buildMedicationStatementTable(p.medicStmnts);
+    buildObservations2Table(p.allObvs) 
   };
 
   window.getDocument = function(accessToken, url, type) {
