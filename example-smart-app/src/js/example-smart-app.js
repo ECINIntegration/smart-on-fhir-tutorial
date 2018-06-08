@@ -548,6 +548,7 @@
   }
   
   function buildDiagnosticsReportTable(diagRpts) {
+    
     var tbl = document.getElementById('tblDiagnosticsReports');
     
     var r0 = document.createElement('tr');
@@ -629,6 +630,7 @@
   }
 
   function buildMedicationOrderTable(medicOrders) {
+    
     var tbl = document.getElementById('tblMedicationOrders');
     
     var r0 = document.createElement('tr');
@@ -680,6 +682,7 @@
   }
 
   function buildMedicationAdministrationTable(medicAdmins) {
+    
     var tbl = document.getElementById('tblMedicationAdministration');
     
     var r0 = document.createElement('tr');
@@ -698,6 +701,7 @@
     tbl.appendChild(r0);
     
     if(medicAdmins != null && Array.isArray(medicAdmins) && medicAdmins.length > 0) {
+      
       for (var i = 0; i < medicAdmins.length; i++) {
         var row0 = document.createElement('tr');
         
@@ -740,6 +744,7 @@
   }
 
   function buildMedicationStatementTable(medicStmnts) {
+    
     var tbl = document.getElementById('tblMedicationStatements');
         
     var r0 = document.createElement('tr');
