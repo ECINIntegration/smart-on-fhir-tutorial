@@ -402,13 +402,13 @@
       for (var i = 0; i < allObv.length; i++) {
         var obsv = new Observation();
         
-        if(allObv[i].category != null){
+        if(allObv[i].category != null && allObv[i].category.text != null){
           obsv.category = allObv[i].category.text;
         }else{
           obsv.category = '';
         }
         
-        if(allObv[i].effectiveDateTime){
+        if(allObv[i].effectiveDateTime != null ){
           obsv.date = allObv[i].effectiveDateTime;
         }else{
           obsv.date = '';
