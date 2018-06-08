@@ -727,7 +727,7 @@
     }
   }
   
-    function buildObservations2Table(observations) {
+  function buildObservations2Table(observations) {
     var tbl = document.getElementById('tblObservations2');
     
     if(observations != null && Array.isArray(observations) && observations.length > 0) {
