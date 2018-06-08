@@ -490,18 +490,21 @@
           cell.style.textAlign = "left";
           cell.style.verticalAlign = "top";
           
+          var k = 0
           var tkn = diagRpts[i].accesstkn;
           
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
+            var k = 0
             var type = diagRpts[i].forms[j].contenttype;
             if(type == 'text/html')
             {
               //html docs only
+              k = k =  1;
               var url = diagRpts[i].forms[j].url;
               var a = document.createElement('a');
-              var linkText = document.createTextNode('Form ' + (j + 1).toString() + ' (' + type + ')');
+              var linkText = document.createTextNode('Form ' + (k + 1).toString());
               a.appendChild(linkText);
-              a.title = 'Form ' + (j + 1).toString() + ' (' + type + ')';
+              a.title = 'Form ' + (k + 1).toString();
               a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               //a.onclick = function() {getDocument(tkn, url, type)};
               cell.appendChild(a);
