@@ -493,17 +493,21 @@
           var tkn = diagRpts[i].accesstkn;
           
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
-            var url = diagRpts[i].forms[j].url;
             var type = diagRpts[i].forms[j].contenttype;
-            var a = document.createElement('a');
-            var linkText = document.createTextNode('Form ' + (j + 1).toString() + ' (' + type + ')');
-            a.appendChild(linkText);
-            a.title = 'Form ' + (j + 1).toString() + ' (' + type + ')';
-            a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
-            //a.onclick = function() {getDocument(tkn, url, type)};
-            cell.appendChild(a);
-            var space = document.createTextNode(" ");
-            cell.appendChild(space);
+            if(type == 'text/html')
+            {
+              //html docs only
+              var url = diagRpts[i].forms[j].url;
+              var a = document.createElement('a');
+              var linkText = document.createTextNode('Form ' + (j + 1).toString() + ' (' + type + ')');
+              a.appendChild(linkText);
+              a.title = 'Form ' + (j + 1).toString() + ' (' + type + ')';
+              a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+              //a.onclick = function() {getDocument(tkn, url, type)};
+              cell.appendChild(a);
+              var space = document.createTextNode(" ");
+              cell.appendChild(space);
+            }
           }
           row0.appendChild(cell);
         }
@@ -678,11 +682,9 @@
       if (xmlHttpRequest.readyState == 4) {//Done
         console.log('xmlHttpRequest.status: ' + xmlHttpRequest.status);
         if (xmlHttpRequest.status === 200) {
-          //var data = URL.createObjectURL(xmlHttpRequest.response);
-          //document.querySelector('#ifrmDoc').src = data;
           var content = xmlHttpRequest.response;
           document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(content);
-          //document.getElementById('ifrmDoc').src = content;
+          document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
         }
@@ -690,10 +692,8 @@
     };
 
     xmlHttpRequest.open('GET', url, true);
-    //xmlHttpRequest.setRequestHeader('Content-Type', type);
     xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + jwt);
     //xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
-    //xmlHttpRequest.setRequestHeader('Accept', 'text/html');
     xmlHttpRequest.setRequestHeader('Accept', type);
     xmlHttpRequest.send('');
   };
