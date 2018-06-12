@@ -742,9 +742,9 @@
           var tkn = docRefs[i].accesstkn;
           for (var j = 0; j < docRefs[i].attachments.length; j++) {
             var type = docRefs[i].attachments[j].contenttype;
-            if(type == 'text/html')
-            {
-              //html docs only
+            //if(type == 'text/html')
+            //{
+            //  //html docs only
               k = k + 1;
               var url = docRefs[i].attachments[j].url;
               var a = document.createElement('a');
@@ -763,7 +763,7 @@
               cell.appendChild(a);
               var space = document.createTextNode(" ");
               cell.appendChild(space);
-            }
+            //}
           }
           
           row0.appendChild(cell);
