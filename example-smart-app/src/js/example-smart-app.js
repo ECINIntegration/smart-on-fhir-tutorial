@@ -325,7 +325,7 @@
           dRef.text = '';
         }
 
-        dRef.attachment = buildAttachments(docRef[i].content);
+        dRef.attachments = buildAttachments(docRef[i].content);
         
         documentReferences.push(dRef);
       }
