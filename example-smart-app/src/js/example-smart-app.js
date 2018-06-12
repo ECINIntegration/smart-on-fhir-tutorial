@@ -670,7 +670,7 @@
                 }
               })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
               
-            }elseif(type == 'application/pdf'){
+            }else if(type == 'application/pdf'){
               //a.href = 'javascript: getPDFDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
@@ -772,7 +772,7 @@
                 }
               })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
               
-            }elseif(type == 'text/html'){
+            }else if(type == 'text/html'){
               //a.href = 'javascript: getHtmlDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
