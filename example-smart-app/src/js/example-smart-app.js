@@ -650,16 +650,17 @@
           var k = 0
           var tkn = diagRpts[i].accesstkn;
           for (var j = 0; j < diagRpts[i].forms.length; j++) {
+            
             var type = diagRpts[i].forms[j].contenttype;
+            k = k + 1;
+            var url = diagRpts[i].forms[j].url;
+            var a = document.createElement('a');
+            var linkText = document.createTextNode('Form ' + k.toString());
+            a.appendChild(linkText);
+            a.title = 'Form ' + k.toString();
+            
             if(type == 'text/html')
             {
-              //html docs only
-              k = k + 1;
-              var url = diagRpts[i].forms[j].url;
-              var a = document.createElement('a');
-              var linkText = document.createTextNode('Form ' + k.toString());
-              a.appendChild(linkText);
-              a.title = 'Form ' + k.toString();
               //a.href = 'javascript: getHtmlDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
@@ -669,10 +670,21 @@
                 }
               })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
               
-              cell.appendChild(a);
-              var space = document.createTextNode(" ");
-              cell.appendChild(space);
+            }elseif(type == 'application/pdf'){
+              //a.href = 'javascript: getPDFDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+              a.href = '#';
+
+              a.onclick = (function(tkn, url, type){
+                return function(){
+                  getPDFDocument(tkn, url, type);
+                }
+              })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
             }
+                          
+            cell.appendChild(a);
+            var space = document.createTextNode(" ");
+            cell.appendChild(space);
+            
           }
           
           row0.appendChild(cell);
@@ -741,16 +753,16 @@
           var k = 0
           var tkn = docRefs[i].accesstkn;
           for (var j = 0; j < docRefs[i].attachments.length; j++) {
+            
             var type = docRefs[i].attachments[j].contenttype;
-            if(type == 'application/pdf')
-            {
-              //pdf docs only
-              k = k + 1;
-              var url = docRefs[i].attachments[j].url;
-              var a = document.createElement('a');
-              var linkText = document.createTextNode('Form ' + k.toString());
-              a.appendChild(linkText);
-              a.title = 'Form ' + k.toString();
+            k = k + 1;
+            var url = docRefs[i].attachments[j].url;
+            var a = document.createElement('a');
+            var linkText = document.createTextNode('Form ' + k.toString());
+            a.appendChild(linkText);
+            a.title = 'Form ' + k.toString();
+            
+            if(type == 'application/pdf'){
               //a.href = 'javascript: getPDFDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
@@ -760,10 +772,21 @@
                 }
               })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
               
-              cell.appendChild(a);
-              var space = document.createTextNode(" ");
-              cell.appendChild(space);
+            }elseif(type == 'text/html'){
+              //a.href = 'javascript: getHtmlDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+              a.href = '#';
+
+              a.onclick = (function(tkn, url, type){
+                return function(){
+                  getHtmlDocument(tkn, url, type);
+                }
+              })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
+              
             }
+            
+            cell.appendChild(a);
+            var space = document.createTextNode(" ");
+            cell.appendChild(space);            
           }
           
           row0.appendChild(cell);
