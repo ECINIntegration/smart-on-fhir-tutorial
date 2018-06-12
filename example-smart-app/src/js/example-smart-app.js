@@ -1110,7 +1110,7 @@
           var content = xmlHttpRequest.response;
           //document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(content);
           //document.getElementById('ifrmDoc').srcdoc = content;
-          document.getElementById('ifrmDoc').src = 'data:application/pdf;charset=utf-8,' + escape(content);
+          document.getElementById('ifrmDoc').src = 'data:application/pdf;charset=utf-8,' + content;
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
