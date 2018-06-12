@@ -660,12 +660,12 @@
               var linkText = document.createTextNode('Form ' + k.toString());
               a.appendChild(linkText);
               a.title = 'Form ' + k.toString();
-              //a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+              //a.href = 'javascript: getHtmlDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
               a.onclick = (function(tkn, url, type){
                 return function(){
-                  getDocument(tkn, url, type);
+                  getHtmlDocument(tkn, url, type);
                 }
               })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
               
@@ -742,28 +742,28 @@
           var tkn = docRefs[i].accesstkn;
           for (var j = 0; j < docRefs[i].attachments.length; j++) {
             var type = docRefs[i].attachments[j].contenttype;
-            //if(type == 'text/html')
-            //{
-            //  //html docs only
+            if(type == 'application/pdf')
+            {
+              //pdf docs only
               k = k + 1;
               var url = docRefs[i].attachments[j].url;
               var a = document.createElement('a');
               var linkText = document.createTextNode('Form ' + k.toString());
               a.appendChild(linkText);
               a.title = 'Form ' + k.toString();
-              //a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+              //a.href = 'javascript: getPDFDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
               a.onclick = (function(tkn, url, type){
                 return function(){
-                  getDocument(tkn, url, type);
+                  getPDFDocument(tkn, url, type);
                 }
               })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
               
               cell.appendChild(a);
               var space = document.createTextNode(" ");
               cell.appendChild(space);
-            //}
+            }
           }
           
           row0.appendChild(cell);
@@ -1068,7 +1068,7 @@
     buildObservations2Table(p.allObvs) 
   };
 
-  window.getDocument = function(accessToken, url, type) {
+  window.getHtmlDocument = function(accessToken, url, type) {
     
     var jwt = accessToken;
     
@@ -1081,6 +1081,36 @@
           var content = xmlHttpRequest.response;
           //document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(content);
           document.getElementById('ifrmDoc').srcdoc = content;
+          document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
+        }else{
+          console.error('No document returned');
+        }
+      }
+    };
+
+    xmlHttpRequest.open('GET', url, true);
+    xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + jwt);
+    //xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
+    xmlHttpRequest.setRequestHeader('Accept', type);
+    xmlHttpRequest.send('');
+    
+    return false; //no need to go to another page yet
+  };
+
+  window.getPDFDocument = function(accessToken, url, type) {
+    
+    var jwt = accessToken;
+    
+    var xmlHttpRequest = new XMLHttpRequest();
+    
+    xmlHttpRequest.onreadystatechange = function () {
+      if (xmlHttpRequest.readyState == 4) {//Done
+        console.log('xmlHttpRequest.status: ' + xmlHttpRequest.status);
+        if (xmlHttpRequest.status === 200) {
+          var content = xmlHttpRequest.response;
+          //document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(content);
+          //document.getElementById('ifrmDoc').srcdoc = content;
+          document.getElementById('ifrmDoc').src = 'data:application/pdf;charset=utf-8,' + escape(content);
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
