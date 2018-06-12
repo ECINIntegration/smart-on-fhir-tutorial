@@ -106,7 +106,8 @@
           p.medicAdmins = buildMedicationAdministrationList(medicAdmin);
           p.medicStmnts = buildMedicationStatementList(medicStmnt);
           p.allObvs = buildAllObservationsList(allObv);
-
+          p.docRefs = buildDocumentReferenceList(docRef, pid, tkn);
+          
           ret.resolve(p);
         });
       } else {
@@ -138,6 +139,7 @@
       medicAdmins: {value: ''},
       medicStmnts: {value: ''},
       allObvs: {value: ''},
+      docRefs: {value: ''},
     };
   }
 
@@ -160,6 +162,24 @@
   }
 
   function diagnosticForm(){
+    return {
+      url: {value: ''},
+      contenttype: {value: ''},
+    };
+  }
+  
+  function documentReference(){
+    return {
+      date: {value: ''},
+      description: {value: ''},
+      text: {value: ''},
+      patid: {value: ''},
+      accesstkn: {value: ''},
+      attachments: {value: ''},
+    };
+  }
+
+  function attachment(){
     return {
       url: {value: ''},
       contenttype: {value: ''},
@@ -284,7 +304,51 @@
     }      
     return diagnosticForms;
   }
+
+  function buildDocumentReferenceList(docRef, pid, tkn){
+    var documentReferences = new Array();
+          
+    if(docRef != null && Array.isArray(docRef)) {
+            
+      for (var i = 0; i < docRef.length; i++) {
+        
+        var dRef = new documentReference();
+        
+        dRef.date = docRef[i].created;
+        dRef.description = docRef[i].description;
+        dRef.patid = pid;
+        dRef.accesstkn = tkn.access_token;
+        
+        if(docRef[i].text != null){
+          dRef.text = docRef[i].text.div;
+        }else{
+          dRef.text = '';
+        }
+
+        dRef.attachment = buildAttachments(docRef[i].content);
+        
+        documentReferences.push(dRef);
+      }
+            
+    }
     
+    return documentReferences;
+  }
+  
+  function buildAttachments(content){
+    var attachments = new Array();
+    
+    if(content != null && Array.isArray(content)) {
+      for (var i = 0; i < content.length; i++) {
+        var att = new attachment();
+        att.url = content[i].attachment.url;
+        att.contenttype = content[i].attachment.contentType;
+        attachments.push(att);
+      }
+    }      
+    return attachments;
+  }
+  
   function buildMedicationOrderList(medicOrders){
     var medicationOrders = new Array();
           
@@ -628,6 +692,97 @@
     }
   }
 
+  function buildDocumentReferenceTable(docRefs) {
+    
+    var tbl = document.getElementById('tblDocumentReferences');
+    
+    var r0 = document.createElement('tr');
+    var th0 = document.createElement('th');
+    th0.innerHTML =  'Description';
+    r0.appendChild(th0);
+    var th1 = document.createElement('th');
+    th1.innerHTML =  'Created';
+    r0.appendChild(th1);
+    var th2 = document.createElement('th');
+    th2.innerHTML =  'Text';
+    r0.appendChild(th2);
+    var th3 = document.createElement('th');
+    th3.innerHTML =  'Document Link';
+    r0.appendChild(th3);
+    tbl.appendChild(r0);
+    
+    if(docRefs != null && Array.isArray(docRefs) && docRefs.length > 0) {
+      for (var i = 0; i < docRefs.length; i++) {
+        var row0 = document.createElement('tr');
+        
+        var cell0 = document.createElement('td');
+        cell0.innerHTML =  docRefs[i].description;
+        cell0.style.textAlign = "left";
+        cell0.style.verticalAlign = "top";
+        row0.appendChild(cell0);
+
+        var cell1 = document.createElement('td');
+        cell1.innerHTML =  docRefs[i].created;
+        cell1.style.textAlign = "left";
+        cell1.style.verticalAlign = "top";
+        row0.appendChild(cell1);        
+
+        var cell2 = document.createElement('td');
+        cell2.innerHTML =  docRefs[i].text;
+        cell2.style.textAlign = "left";
+        cell2.style.verticalAlign = "top";
+        row0.appendChild(cell2);
+        
+        var cell = document.createElement('td');
+        cell.style.textAlign = "left";
+        cell.style.verticalAlign = "top";
+        
+        if(docRefs[i].attachments != null && Array.isArray(docRefs[i].attachments)) {
+          var k = 0
+          var tkn = docRefs[i].accesstkn;
+          for (var j = 0; j < docRefs[i].attachments.length; j++) {
+            var type = docRefs[i].attachments[j].contenttype;
+            if(type == 'text/html')
+            {
+              //html docs only
+              k = k + 1;
+              var url = docRefs[i].attachments[j].url;
+              var a = document.createElement('a');
+              var linkText = document.createTextNode('Form ' + k.toString());
+              a.appendChild(linkText);
+              a.title = 'Form ' + k.toString();
+              //a.href = 'javascript: getDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
+              a.href = '#';
+
+              a.onclick = (function(tkn, url, type){
+                return function(){
+                  getDocument(tkn, url, type);
+                }
+              })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
+              
+              cell.appendChild(a);
+              var space = document.createTextNode(" ");
+              cell.appendChild(space);
+            }
+          }
+          
+          row0.appendChild(cell);
+        }
+        
+        tbl.appendChild(row0); 
+      }
+    }else{
+      var row = document.createElement('tr');
+      var cell = document.createElement('td');
+      cell.textContent = "N/A";
+      cell.style.textAlign = "center";
+      cell.style.verticalAlign = "top";
+      cell.colSpan = 4;
+      row.appendChild(cell);
+      tbl.appendChild(row); 
+    }
+  }
+
   function buildMedicationOrderTable(medicOrders) {
     
     var tbl = document.getElementById('tblMedicationOrders');
@@ -905,6 +1060,7 @@
     $('#hdl').html(p.hdl);
 
     buildDiagnosticsReportTable(p.diagRpts);    
+    buildDocumentReferenceTable(p.docRefs);    
     buildImmunizationsTable(p.imms);   
     buildMedicationOrderTable(p.medicOrders);
     buildMedicationAdministrationTable(p.medicAdmins);
