@@ -1107,8 +1107,10 @@
       if (xmlHttpRequest.readyState == 4) {//Done
         console.log('xmlHttpRequest.status: ' + xmlHttpRequest.status);
         if (xmlHttpRequest.status === 200) {
-          var content = xmlHttpRequest.response;
-          document.getElementById('ifrmDoc').src = 'data:application/pdf,' + content;
+          //var content = xmlHttpRequest.response;
+          var pdfData = URL.createObjectURL(xmlHttpRequest.response);
+          //document.getElementById('ifrmDoc').src = 'data:application/pdf,' + content;
+          document.getElementById('ifrmDoc').src = pdfData;
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
@@ -1120,6 +1122,7 @@
     xmlHttpRequest.setRequestHeader('Authorization', 'Bearer ' + jwt);
     //xmlHttpRequest.setRequestHeader('Accept', 'application/json+fhir');
     xmlHttpRequest.setRequestHeader('Accept', type);
+    xmlHttpRequest.responseType = 'blob';
     xmlHttpRequest.send('');
     
     return false; //no need to go to another page yet
