@@ -1108,12 +1108,11 @@
           document.getElementById('ifrmDoc').srcdoc = content;
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
           */
-          var htmlData = URL.createObjectURL(xmlHttpRequest.response);
           var iFrm = document.getElementById('ifrmDoc');
           //iFrm.setAttribute('src', null);
           //iFrm.setAttribute('srcdoc', null);
           //iFrm.setAttribute('srcdoc', content);
-          iFrm.setAttribute('src', htmlData);
+          iFrm.setAttribute('src', content);
           iFrm.setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
