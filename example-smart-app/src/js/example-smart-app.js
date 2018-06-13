@@ -1102,10 +1102,17 @@
         console.log('xmlHttpRequest.status: ' + xmlHttpRequest.status);
         if (xmlHttpRequest.status === 200) {
           var content = xmlHttpRequest.response;
+          /*
           document.getElementById('ifrmDoc').src = '';
           //document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(content);
           document.getElementById('ifrmDoc').srcdoc = content;
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
+          */
+          var iFrm = document.getElementById('ifrmDoc');
+          iFrm.attr('src', null);
+          iFrm.attr('srcdoc', null);
+          iFrm.srcdoc = content;
+          iFrm.attr('style', 'display: block');
         }else{
           console.error('No document returned');
         }
@@ -1132,9 +1139,16 @@
         console.log('xmlHttpRequest.status: ' + xmlHttpRequest.status);
         if (xmlHttpRequest.status === 200) {
           var pdfData = URL.createObjectURL(xmlHttpRequest.response);
+          /*
           document.getElementById('ifrmDoc').src = '';
           document.getElementById('ifrmDoc').src = pdfData;
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
+          */
+          var iFrm = document.getElementById('ifrmDoc');
+          iFrm.attr('src', null);
+          iFrm.attr('srcdoc', null);
+          iFrm.src = pdfData;
+          iFrm.attr('style', 'display: block');
         }else{
           console.error('No document returned');
         }
