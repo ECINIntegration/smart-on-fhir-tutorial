@@ -1147,6 +1147,7 @@
           iFrm.setAttribute('srcdoc', '');
           iFrm.setAttribute('src', pdfData);
           iFrm.setAttribute('style', 'display: block');
+          iFrm.contentWindow.location.reload(true);
         }else{
           console.error('No document returned');
         }
