@@ -314,8 +314,18 @@
         
         var dRef = new documentReference();
         
-        dRef.date = docRef[i].created;
-        dRef.description = docRef[i].description;
+        if(docRef[i].created != null){
+          dRef.date = docRef[i].created;
+        }else{
+          dRef.date = '';
+        }
+        
+        if(docRef[i].description != null){
+          dRef.description = docRef[i].description;
+        }else{
+          dRef.description = '';
+        }
+ 
         dRef.patid = pid;
         dRef.accesstkn = tkn.access_token;
         
@@ -734,7 +744,7 @@
         row0.appendChild(cell0);
 
         var cell1 = document.createElement('td');
-        cell1.innerHTML =  docRefs[i].created;
+        cell1.innerHTML =  docRefs[i].date;
         cell1.style.textAlign = "left";
         cell1.style.verticalAlign = "top";
         row0.appendChild(cell1);        
@@ -1102,12 +1112,6 @@
         console.log('xmlHttpRequest.status: ' + xmlHttpRequest.status);
         if (xmlHttpRequest.status === 200) {
           var content = xmlHttpRequest.response;
-          /*
-          document.getElementById('ifrmDoc').src = '';
-          //document.getElementById('ifrmDoc').src = 'data:text/html;charset=utf-8,' + escape(content);
-          document.getElementById('ifrmDoc').srcdoc = content;
-          document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
-          */
           var iFrm = document.getElementById('ifrmDoc');
           iFrm.setAttribute('src', '');
           iFrm.setAttribute('srcdoc', content);
@@ -1138,17 +1142,11 @@
         console.log('xmlHttpRequest.status: ' + xmlHttpRequest.status);
         if (xmlHttpRequest.status === 200) {
           var pdfData = URL.createObjectURL(xmlHttpRequest.response);
-          /*
-          document.getElementById('ifrmDoc').src = '';
-          document.getElementById('ifrmDoc').src = pdfData;
-          document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
-          */
           var iFrm = document.getElementById('ifrmDoc');
           iFrm.setAttribute('srcdoc', '');
           iFrm.removeAttribute('srcdoc');
           iFrm.setAttribute('src', pdfData);
           iFrm.setAttribute('style', 'display: block');
-          //iFrm.contentDocument.location.reload(true);
         }else{
           console.error('No document returned');
         }
