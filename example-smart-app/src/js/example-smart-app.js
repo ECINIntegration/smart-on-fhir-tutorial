@@ -1109,10 +1109,10 @@
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
           */
           var iFrm = document.getElementById('ifrmDoc');
-          iFrm.attr('src', null);
-          iFrm.attr('srcdoc', null);
-          iFrm.srcdoc = content;
-          iFrm.attr('style', 'display: block');
+          iFrm.setAttribute('src', null);
+          iFrm.setAttribute('srcdoc', null);
+          iFrm.setAttribute('srcdoc', content);
+          iFrm.setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
         }
@@ -1145,10 +1145,10 @@
           document.getElementById('ifrmDoc').setAttribute('style', 'display: block');
           */
           var iFrm = document.getElementById('ifrmDoc');
-          iFrm.attr('src', null);
-          iFrm.attr('srcdoc', null);
-          iFrm.src = pdfData;
-          iFrm.attr('style', 'display: block');
+          iFrm.setAttribute('src', null);
+          iFrm.setAttribute('srcdoc', null);
+          iFrm.setAttribute('src', pdfData);
+          iFrm.setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
         }
