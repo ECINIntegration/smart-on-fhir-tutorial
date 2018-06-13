@@ -1112,7 +1112,7 @@
           //iFrm.setAttribute('src', null);
           //iFrm.setAttribute('srcdoc', null);
           //iFrm.setAttribute('srcdoc', content);
-          iFrm.setAttribute('src', content);
+          iFrm.setAttribute('src', escape(content));
           iFrm.setAttribute('style', 'display: block');
         }else{
           console.error('No document returned');
