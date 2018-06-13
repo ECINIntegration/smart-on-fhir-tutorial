@@ -1146,7 +1146,7 @@
           */
           var iFrm = document.getElementById('ifrmDoc');
           iFrm.setAttribute('src', null);
-          iFrm.setAttribute('srcdoc', null);
+          //iFrm.setAttribute('srcdoc', null);
           iFrm.setAttribute('src', pdfData);
           iFrm.setAttribute('style', 'display: block');
         }else{
