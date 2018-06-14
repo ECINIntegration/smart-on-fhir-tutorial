@@ -665,12 +665,11 @@
             k = k + 1;
             var url = diagRpts[i].forms[j].url;
             var a = document.createElement('a');
-            var linkText = document.createTextNode('Form ' + k.toString());
-            a.appendChild(linkText);
-            a.title = 'Form ' + k.toString();
             
-            if(type == 'text/html')
-            {
+            if(type == 'text/html'){
+              var linkText = document.createTextNode('Form ' + k.toString() + ' (HTML)');
+              a.appendChild(linkText);
+              a.title = 'Form ' + k.toString() + ' (HTML)';
               //a.href = 'javascript: getHtmlDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
@@ -681,6 +680,9 @@
               })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
               
             }else if(type == 'application/pdf'){
+              var linkText = document.createTextNode('Form ' + k.toString() + ' (PDF)');
+              a.appendChild(linkText);
+              a.title = 'Form ' + k.toString() + ' (PDF)';
               //a.href = 'javascript: getPDFDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
@@ -768,11 +770,11 @@
             k = k + 1;
             var url = docRefs[i].attachments[j].url;
             var a = document.createElement('a');
-            var linkText = document.createTextNode('Form ' + k.toString());
-            a.appendChild(linkText);
-            a.title = 'Form ' + k.toString();
             
             if(type == 'application/pdf'){
+              var linkText = document.createTextNode('Form ' + k.toString() + ' (PDF)');
+              a.appendChild(linkText);
+              a.title = 'Form ' + k.toString() + ' (PDF)';
               //a.href = 'javascript: getPDFDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
@@ -783,6 +785,9 @@
               })(tkn, url, type); //Immediately-Invoked Function Expression (IIFE)
               
             }else if(type == 'text/html'){
+              var linkText = document.createTextNode('Form ' + k.toString() + ' (HTML)');
+              a.appendChild(linkText);
+              a.title = 'Form ' + k.toString() + ' (HTML)';
               //a.href = 'javascript: getHtmlDocument("' + tkn + '", "' +  url + '", "' +  type + '");'
               a.href = '#';
 
